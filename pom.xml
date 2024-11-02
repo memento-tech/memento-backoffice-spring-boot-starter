@@ -137,13 +137,6 @@
     <distributionManagement>
         <repository>
             <id>github</id>
-            <url>https://maven.pkg.github.com/YOUR_USERNAME/spring-boot-starter-helloworld</url>
-        </repository>
-    </distributionManagement>
-
-    <distributionManagement>
-        <repository>
-            <id>github</id>
             <name>GitHub Packages</name>
             <url>https://maven.pkg.github.com/OWNER/REPOSITORY</url>
         </repository>
