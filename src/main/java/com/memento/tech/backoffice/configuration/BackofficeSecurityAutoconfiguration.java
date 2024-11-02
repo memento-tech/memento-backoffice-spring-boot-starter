@@ -2,9 +2,9 @@ package com.memento.tech.backoffice.configuration;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -18,7 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Configuration
-@Conditional(BackofficeEnabledCondition.class)
+@ConditionalOnProperty(name = "memento.tech.backoffice.enabled", havingValue = "true")
 @ComponentScan(basePackages = "com.memento.tech.starter")
 @RequiredArgsConstructor
 public class BackofficeSecurityAutoconfiguration {
