@@ -17,6 +17,7 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.Ordered;
@@ -36,6 +37,7 @@ import java.nio.file.Paths;
 @RequiredArgsConstructor
 @EntityScan("com.memento.tech.backoffice.entity")
 @EnableJpaRepositories(basePackages = {"com.memento.tech.backoffice.repository"})
+@ConfigurationProperties
 public class BackofficeAutoconfiguration implements WebMvcConfigurer {
 
     private final EntitySettingsService entitySettingsService;
