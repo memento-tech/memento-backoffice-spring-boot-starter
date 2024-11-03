@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -27,37 +29,8 @@ public class BackofficeSecurityAutoconfiguration {
     @Value("${memento.tech.backoffice.media.mapping}")
     private String mediaMapping;
 
-//    @Bean
-//    public SecurityFilterChain backofficeSecurity(HttpSecurity http) throws Exception {
-//        return http
-//                .securityMatcher("/backoffice**", "/api/backoffice**", mediaMapping)
-//                .cors(cors -> cors.configurationSource(request -> {
-//                    CorsConfiguration configuration = new CorsConfiguration();
-//                    configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "https://localhost:3000"));
-//                    configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "UPDATE", "OPTIONS"));
-//                    configuration.setAllowedHeaders(List.of("*"));
-//                    configuration.setAllowCredentials(true);
-//                    return configuration;
-//                }))
-//                .csrf(AbstractHttpConfigurer::disable)
-//                .authorizeHttpRequests(request -> request
-//                        .requestMatchers("/api/auth/**", mediaMapping)
-//                        .permitAll()
-//                        .anyRequest()
-//                        .authenticated())
-//                .sessionManagement(sessionConfigurer -> sessionConfigurer
-//                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//                )
-//                .formLogin(form -> form
-//                        .loginPage("/login")
-//                        .permitAll()
-//                )
-//                .authenticationProvider(backofficeAuthenticationProvider)
-//                .addFilterBefore(backofficeJwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-//                .build();
-//    }
-
     @Bean
+    @Order(Ordered.HIGHEST_PRECEDENCE)
     public SecurityFilterChain backofficeSecurity(HttpSecurity http) throws Exception {
         return http
                 .securityMatcher("/backoffice/**", "/api/backoffice/**", mediaMapping)
@@ -71,10 +44,10 @@ public class BackofficeSecurityAutoconfiguration {
                 }))
                 .csrf(AbstractHttpConfigurer::disable) // Disable CSRF for stateless session
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers("/backoffice/**", "/api/backoffice/**", mediaMapping) // Permit all requests to auth and media mapping
+                        .requestMatchers("/index.html", "/backoffice/**", "/api/backoffice/**", mediaMapping) // Permit all requests to auth and media mapping
                         .permitAll()
                         .anyRequest()
-                        .authenticated())
+                        .permitAll())
                 .sessionManagement(sessionConfigurer ->
                         sessionConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Stateless session management
                 .formLogin(form -> form
