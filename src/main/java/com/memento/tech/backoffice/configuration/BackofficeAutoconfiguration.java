@@ -20,6 +20,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.Ordered;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -34,6 +35,7 @@ import java.nio.file.Paths;
 @ComponentScan(basePackages = "com.memento.tech.backoffice")
 @RequiredArgsConstructor
 @EntityScan("com.memento.tech.backoffice.entity")
+@EnableJpaRepositories(basePackages = {"com.memento.tech.backoffice.repository"})
 public class BackofficeAutoconfiguration implements WebMvcConfigurer {
 
     private final EntitySettingsService entitySettingsService;
