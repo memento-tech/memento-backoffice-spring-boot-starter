@@ -1,3 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.memento.tech.backoffice.configuration.BackofficeAutoconfiguration,\
-  com.memento.tech.backoffice.configuration.BackofficeSecurityAutoconfiguration
