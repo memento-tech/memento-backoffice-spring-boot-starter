@@ -23,7 +23,7 @@ public class DefaultLanguageService implements LanguageService {
 
     private final LanguageRepository languageRepository;
 
-    @Value("${backoffice.translation.defaultLanguage:undefined}")
+    @Value("${memento.tech.backoffice.translation.defaultLanguage:undefined}")
     private String defaultLanguage;
 
     @Override
