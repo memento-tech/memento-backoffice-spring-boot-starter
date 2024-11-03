@@ -33,7 +33,7 @@ public class BackofficeSecurityAutoconfiguration {
     @Order(Ordered.HIGHEST_PRECEDENCE)
     public SecurityFilterChain backofficeSecurity(HttpSecurity http) throws Exception {
         return http
-                .securityMatcher("/backoffice/**", "/api/backoffice/**", mediaMapping)
+                .securityMatcher("/index.html", "/backoffice/**", "/api/backoffice/**", mediaMapping)
                 .cors(cors -> cors.configurationSource(request -> {
                     CorsConfiguration configuration = new CorsConfiguration();
                     configuration.setAllowedOrigins(List.of()); // Allow requests from the React app
