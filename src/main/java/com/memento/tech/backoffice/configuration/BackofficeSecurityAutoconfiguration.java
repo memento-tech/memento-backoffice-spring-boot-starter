@@ -13,7 +13,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 
-import java.util.Arrays;
 import java.util.List;
 
 @AutoConfiguration
@@ -24,9 +23,6 @@ public class BackofficeSecurityAutoconfiguration {
     private final BackofficeJwtAuthenticationFilter backofficeJwtAuthenticationFilter;
 
     private final AuthenticationProvider backofficeAuthenticationProvider;
-
-    @Value("${memento.tech.backoffice.react.server}")
-    private String backofficeReactServer;
 
     @Value("${memento.tech.backoffice.media.mapping}")
     private String mediaMapping;
@@ -67,10 +63,10 @@ public class BackofficeSecurityAutoconfiguration {
                 .securityMatcher("/backoffice/**", "/api/backoffice/**", mediaMapping)
                 .cors(cors -> cors.configurationSource(request -> {
                     CorsConfiguration configuration = new CorsConfiguration();
-                    configuration.setAllowedOrigins(List.of(backofficeReactServer)); // Allow requests from the React app
-                    configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
+                    configuration.setAllowedOrigins(List.of()); // Allow requests from the React app
+                    configuration.setAllowedMethods(List.of());
                     configuration.setAllowedHeaders(List.of("*")); // Allow all headers
-                    configuration.setAllowCredentials(true); // Allow credentials
+                    configuration.setAllowCredentials(false); // Allow credentials
                     return configuration;
                 }))
                 .csrf(AbstractHttpConfigurer::disable) // Disable CSRF for stateless session
