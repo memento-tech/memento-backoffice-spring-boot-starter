@@ -21,7 +21,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Service
-@ConditionalOnProperty(name = "backoffice.media.storage.enabled", havingValue = "true")
+@ConditionalOnProperty(name = "memento.tech.backoffice.media.storage.enabled", havingValue = "true")
 @RequiredArgsConstructor
 @Slf4j
 public class DefaultFileStorageService implements FileStorageService {
