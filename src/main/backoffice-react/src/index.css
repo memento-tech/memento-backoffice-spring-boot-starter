@@ -1,0 +1,51 @@
+body {
+  margin: 0;
+  font-size: 1.2rem;
+  width: 100%;
+
+  font-family: "Roboto Serif", serif;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal;
+  font-variation-settings: "wdth" 100, "GRAD" 0;
+
+  p,
+  h1,
+  h2,
+  h3,
+  h4 {
+    margin: 0;
+  }
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
+
+  button {
+    font-family: "Roboto Serif", serif;
+    background-color: transparent;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
+  input,
+  textarea {
+    font-family: "Roboto Serif", serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+    font-variation-settings: "wdth" 100, "GRAD" 0;
+  }
+
+  input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+  }
+
+  #root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+}

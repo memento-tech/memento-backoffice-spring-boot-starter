@@ -25,6 +25,9 @@ public class BackofficeSecurityAutoconfiguration {
 
     private final AuthenticationProvider backofficeAuthenticationProvider;
 
+    @Value("${memento.tech.backoffice.react.server}")
+    private String backofficeReactServer;
+
     @Value("${memento.tech.backoffice.media.mapping}")
     private String mediaMapping;
 
@@ -64,7 +67,7 @@ public class BackofficeSecurityAutoconfiguration {
                 .securityMatcher("/backoffice/**", "/api/backoffice/**", mediaMapping)
                 .cors(cors -> cors.configurationSource(request -> {
                     CorsConfiguration configuration = new CorsConfiguration();
-                    configuration.setAllowedOrigins(List.of("http://localhost:3000")); // Allow requests from the React app
+                    configuration.setAllowedOrigins(List.of(backofficeReactServer)); // Allow requests from the React app
                     configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
                     configuration.setAllowedHeaders(List.of("*")); // Allow all headers
                     configuration.setAllowCredentials(true); // Allow credentials
@@ -74,15 +77,15 @@ public class BackofficeSecurityAutoconfiguration {
                 .authorizeHttpRequests(request -> request
                         .requestMatchers("/api/auth/**", mediaMapping) // Permit all requests to auth and media mapping
                         .permitAll()
-                        .anyRequest() // All other requests require authentication
+                        .anyRequest()
                         .authenticated())
                 .sessionManagement(sessionConfigurer ->
                         sessionConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Stateless session management
                 .formLogin(form -> form
                         .loginPage("/login") // Set custom login page URL
-                        .permitAll() // Allow all users to access the login page
-                        .defaultSuccessUrl("/backoffice", true) // Redirect to /backoffice after successful login
-                        .failureUrl("/login?error=true") // Redirect to login with error if login fails
+                        .permitAll()
+                        .defaultSuccessUrl("/backoffice", true)
+                        .failureUrl("/login?error=true")
                 )
                 .authenticationProvider(backofficeAuthenticationProvider)
                 .addFilterBefore(backofficeJwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class) // Add JWT filter
