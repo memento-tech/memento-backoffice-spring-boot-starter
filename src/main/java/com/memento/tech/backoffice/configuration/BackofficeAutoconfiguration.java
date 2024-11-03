@@ -31,7 +31,7 @@ import java.nio.file.Paths;
 @AutoConfiguration
 @AutoConfigureOrder(Ordered.HIGHEST_PRECEDENCE)
 @ConditionalOnProperty(name = "memento.tech.backoffice.enabled", havingValue = "true")
-@ComponentScan(basePackages = "com.memento.tech.starter")
+@ComponentScan(basePackages = "com.memento.tech.backoffice")
 @RequiredArgsConstructor
 @EntityScan("com.memento.tech.backoffice.entity")
 public class BackofficeAutoconfiguration implements WebMvcConfigurer {
