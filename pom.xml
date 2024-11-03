@@ -5,7 +5,7 @@
 
     <groupId>com.memento.tech</groupId>
     <artifactId>memento-backoffice-spring-boot-starter</artifactId>
-    <version>0.0.3-SNAPSHOT</version>
+    <version>0.0.4-SNAPSHOT</version>
     <name>Memento Backoffice Spring Boot Starter</name>
     <description>Spring Boot starter for backoffice services</description>
 
