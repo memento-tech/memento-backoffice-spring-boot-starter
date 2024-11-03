@@ -71,7 +71,7 @@ public class BackofficeSecurityAutoconfiguration {
                 }))
                 .csrf(AbstractHttpConfigurer::disable) // Disable CSRF for stateless session
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers("/api/auth/**", mediaMapping) // Permit all requests to auth and media mapping
+                        .requestMatchers("/backoffice/**", "/api/backoffice/**", mediaMapping) // Permit all requests to auth and media mapping
                         .permitAll()
                         .anyRequest()
                         .authenticated())
