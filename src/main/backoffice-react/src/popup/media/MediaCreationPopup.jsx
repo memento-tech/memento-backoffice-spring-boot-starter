@@ -5,7 +5,6 @@ import BasicInputField from "../../components/BasicInputField";
 import { CircularProgress } from "../../components/CircularProgress";
 import PopupErrorMessage from "../../components/PopupErrorMessage";
 import PopupFieldsContainer from "../../components/PopupFieldsContainer";
-import styled from "styled-components";
 import PopupButtons from "../components/PopupButtons";
 import { PopupDataContainer } from "../components/PopupDataContainer";
 import PopupTitle from "../components/PopupTitle";
@@ -57,7 +56,10 @@ const MediaCreationPopup = ({ zIndex, onClose, onSaveSuccess }) => {
           updatable={true}
           addMargin={false}
         />
-        <ImagePreviewWithImportButton onImport={setMedia} existingImage={undefined} />
+        <ImagePreviewWithImportButton
+          onImport={setMedia}
+          existingImage={undefined}
+        />
       </PopupFieldsContainer>
     );
   };

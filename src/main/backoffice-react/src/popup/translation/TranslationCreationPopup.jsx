@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import { useEffect, useState } from "react";
 import {
   getAvailableLanguages,
@@ -8,7 +7,6 @@ import BasicInputField from "../../components/BasicInputField";
 import { CircularProgress } from "../../components/CircularProgress";
 import PopupErrorMessage from "../../components/PopupErrorMessage";
 import PopupFieldsContainer from "../../components/PopupFieldsContainer";
-import SubmitButton from "../../components/SubmitButton";
 import PopupModal from "../PopupModal";
 import PopupButtons from "../components/PopupButtons";
 import { PopupDataContainer } from "../components/PopupDataContainer";

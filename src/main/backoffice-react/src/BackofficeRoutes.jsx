@@ -6,7 +6,6 @@ const BackofficeRoutes = () => {
     <Routes>
       <Route element={<Outlet />}>
         <Route path="/" element={<BackofficeProxy />} />
-        <Route path="/:entityName" element={<BackofficeProxy />} />
       </Route>
     </Routes>
   );

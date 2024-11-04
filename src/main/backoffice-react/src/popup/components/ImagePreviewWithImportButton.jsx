@@ -5,19 +5,18 @@ import { useState } from "react";
 import PopupErrorMessage from "../../components/PopupErrorMessage";
 
 const ImagePreviewWithImportButton = ({
-  existingImage ,
+  existingImage,
   onImport,
   allowedTypes = ["image/jpeg", "image/jpg", "image/png", "image/webp"],
   topDownFlex = true,
 }) => {
   const [mediaPreview, setMediaPreview] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
-  const [allowedFileTypes, setAllowedFileTypes] = useState(allowedTypes);
 
   const handleImageSelectionInternal = (event) => {
     const file = event.target.files[0];
 
-    if (!allowedFileTypes.includes(file.type)) {
+    if (!allowedTypes.includes(file.type)) {
       setErrorMessage(
         "Only these image types are allowed: " + allowedTypes.concat(",")
       );
@@ -63,8 +62,6 @@ const Container = styled.div`
   align-items: center;
   width: 100%;
 `;
-
-const ErrorMessage = styled.p``;
 
 const ImportFileButtonLabel = styled.label`
   display: flex;

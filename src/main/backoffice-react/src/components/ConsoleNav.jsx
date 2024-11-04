@@ -5,14 +5,19 @@ import {
   fetchEntityMetadatas,
   setSelectedEntityMetadata,
 } from "../redux/reducers/entityMetadataSlice";
-import { useParams, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import RefreshIcon from "./icons/RefreshIcon";
 
 const ConsoleNav = () => {
   const dispatch = useDispatch();
-  const { entityName } = useParams();
   const navigate = useNavigate();
+  const searchParams = useSearchParams();
+  const [entityName, setEntityName] = useState(searchParams.get("entityName"));
+
+  useEffect(() => {
+    setEntityName(searchParams.get("entityName"));
+  }, [searchParams]);
 
   useEffect(() => {
     if (entityName) {
@@ -29,7 +34,7 @@ const ConsoleNav = () => {
   };
 
   const handleButtonClick = (entityName) => {
-    navigate(`/backoffice/${entityName}`);
+    navigate(`/backoffice?entityName=${entityName}`);
     window.scrollTo(0, 0);
   };
 

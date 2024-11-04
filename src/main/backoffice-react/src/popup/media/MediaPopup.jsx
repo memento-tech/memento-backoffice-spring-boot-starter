@@ -155,16 +155,6 @@ const PopupMediaContainer = styled.div`
   align-items: center;
 `;
 
-const ImagePreviewContainer = styled.div`
-  margin-top: 10px;
-  img {
-    max-width: 100%;
-    max-height: 200px;
-    border: 1px solid #ccc;
-    padding: 5px;
-  }
-`;
-
 const WidgetContainer = styled.div`
   width: 100%;
   margin: auto;

@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import API from "./config/api.jsx";
 
 const BackofficeAuthContext = createContext(null);
 

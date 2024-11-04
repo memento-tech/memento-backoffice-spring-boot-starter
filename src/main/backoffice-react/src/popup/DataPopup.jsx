@@ -3,8 +3,6 @@ import { useSelector } from "react-redux";
 import ExistingEntityPopup from "./general/ExistingEntityPopup";
 import TranslationPopup from "./translation/TranslationPopup";
 import MediaPopup from "./media/MediaPopup";
-import MediaSelectionPopup from "./media/MediaSelectionPopup";
-import EntitySelectionPopup from "./general/EntitySelectionPopup";
 import SelectionPopup from "./SelectionPopup";
 
 const DataPopup = () => {

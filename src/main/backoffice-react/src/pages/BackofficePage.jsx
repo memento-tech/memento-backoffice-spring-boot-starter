@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import ConsoleNav from "../components/ConsoleNav";
 import ConsoleData from "../components/ConsoleData";
 import LoadingOverlay from "../components/LoadingOverlay";

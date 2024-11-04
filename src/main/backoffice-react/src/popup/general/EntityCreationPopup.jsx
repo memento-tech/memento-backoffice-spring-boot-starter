@@ -1,11 +1,8 @@
-import styled from "styled-components";
 import { useState } from "react";
 import { saveEntityData } from "../../adapters/entityAdapter";
 import BasicInputField from "../../components/BasicInputField";
 import NonBasicFieldButton from "../../components/NonBasicFieldButton";
-import { useSelector } from "react-redux";
 import PopupModal from "../PopupModal";
-import SubmitButton from "../../components/SubmitButton";
 import PopupErrorMessage from "../../components/PopupErrorMessage";
 import PopupFieldsContainer from "../../components/PopupFieldsContainer";
 import { PopupDataContainer } from "../components/PopupDataContainer";

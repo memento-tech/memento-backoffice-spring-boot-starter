@@ -1,11 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import { useWidgets } from "../providers/WidgetContext";
+import { useAlerts } from "../alert/AlertsContext";
 
 const { OutlinedButton } = require("../components/OutlinedButton");
 
 const WidgetButton = ({ widget, entityName, recordId }) => {
   const { showRecordWidget, handleRecordWidget, handleEntityWidget } =
     useWidgets();
+
+  const { addAlert } = useAlerts();
 
   const showWidget = async () => {
     return await showRecordWidget(widget, entityName, recordId).then(
@@ -21,14 +24,32 @@ const WidgetButton = ({ widget, entityName, recordId }) => {
         onClick={(event) => {
           event.preventDefault();
           if (widget.entityLevel) {
-            handleEntityWidget();
+            handleEntityWidget().then((result) => {
+              if (result.success) {
+                navigate(0);
+              } else {
+                addAlert({
+                  severity: "error",
+                  messages: result.errorCode,
+                  timeout: 2000,
+                });
+              }
+            });
           } else if (widget.recordLevel) {
-            handleRecordWidget(widget, entityName, recordId);
+            handleRecordWidget(widget, entityName, recordId).then((result) => {
+              if (result.success) {
+                navigate(0);
+              } else {
+                addAlert({
+                  severity: "error",
+                  messages: result.errorCode,
+                  timeout: 2000,
+                });
+              }
+            });
           } else {
             return;
           }
-
-          // navigate(0);
         }}
       >
         {widget.label}

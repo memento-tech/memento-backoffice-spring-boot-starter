@@ -3,13 +3,9 @@ import styled from "styled-components";
 import { getEntityData } from "../../adapters/entityAdapter";
 import { CircularProgress } from "../../components/CircularProgress";
 import PopupErrorMessage from "../../components/PopupErrorMessage";
-import SubmitButton from "../../components/SubmitButton";
 import PopupModal from "../PopupModal";
-import Checkbox from "../../components/Checkbox";
-import { OutlinedButton } from "../../components/OutlinedButton";
 import PopupFieldsContainer from "../../components/PopupFieldsContainer";
 import BasicInputField from "../../components/BasicInputField";
-import UpdateEntityIcon from "../../components/icons/UpdateEntityIcon";
 import PopupButtons from "../components/PopupButtons";
 import { PopupDataContainer } from "../components/PopupDataContainer";
 import PopupTitle from "../components/PopupTitle";
@@ -88,22 +84,21 @@ const MediaSelectionPopup = ({
   };
 
   const getVisibleMediaFieldValues = () => {
-    {
-      return entityMetadata.entityFields.map((field, index) => {
-        if (field.basic) {
-          return (
-            <BasicInputField
-              key={index}
-              placeholder={field.name}
-              value={visibleMedia[field.id]}
-              passwordType={false}
-              onChange={() => {}}
-              updatable={false}
-            />
-          );
-        }
-      });
-    }
+    return entityMetadata.entityFields.map((field, index) => {
+      if (field.basic) {
+        return (
+          <BasicInputField
+            key={index}
+            placeholder={field.name}
+            value={visibleMedia[field.id]}
+            passwordType={false}
+            onChange={() => {}}
+            updatable={false}
+          />
+        );
+      }
+      return <></>;
+    });
   };
 
   const getButtonLabel = (dataValue) => {
