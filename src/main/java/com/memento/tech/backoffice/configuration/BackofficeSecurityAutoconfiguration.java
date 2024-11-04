@@ -33,7 +33,7 @@ public class BackofficeSecurityAutoconfiguration {
     @Order(Ordered.HIGHEST_PRECEDENCE)
     public SecurityFilterChain backofficeSecurity(HttpSecurity http) throws Exception {
         return http
-                .securityMatcher("/index.html", "/backoffice/**", "/api/backoffice/**", mediaMapping)
+                .securityMatcher("/backoffice/**", "/api/backoffice/**", mediaMapping)
                 .cors(cors -> cors.configurationSource(request -> {
                     CorsConfiguration configuration = new CorsConfiguration();
                     configuration.setAllowedOrigins(List.of()); // Allow requests from the React app
@@ -44,7 +44,7 @@ public class BackofficeSecurityAutoconfiguration {
                 }))
                 .csrf(AbstractHttpConfigurer::disable) // Disable CSRF for stateless session
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers("/index.html", "/backoffice/**", "/api/backoffice/**", mediaMapping) // Permit all requests to auth and media mapping
+                        .requestMatchers("/backoffice/**", "/api/backoffice/**", mediaMapping) // Permit all requests to auth and media mapping
                         .permitAll()
                         .anyRequest()
                         .permitAll())

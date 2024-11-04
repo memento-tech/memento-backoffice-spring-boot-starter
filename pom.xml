@@ -174,7 +174,7 @@
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>target/classes/static</outputDirectory>
+                            <outputDirectory>target/classes/static/backoffice</outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>src/main/backoffice-react/build</directory>

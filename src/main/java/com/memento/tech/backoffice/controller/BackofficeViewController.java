@@ -11,6 +11,6 @@ public class BackofficeViewController {
 
     @GetMapping
     public ModelAndView getTest() {
-        return new ModelAndView("index");
+        return new ModelAndView("backoffice/index");
     }
 }
