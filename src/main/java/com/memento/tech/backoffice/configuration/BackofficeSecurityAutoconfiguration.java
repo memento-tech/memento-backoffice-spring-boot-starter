@@ -1,6 +1,6 @@
 package com.memento.tech.backoffice.configuration;
 
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -19,7 +19,6 @@ import java.util.List;
 
 @AutoConfiguration
 @ConditionalOnProperty(name = "memento.tech.backoffice.enabled", havingValue = "true")
-@RequiredArgsConstructor
 public class BackofficeSecurityAutoconfiguration {
 
     private final BackofficeJwtAuthenticationFilter backofficeJwtAuthenticationFilter;
@@ -28,6 +27,13 @@ public class BackofficeSecurityAutoconfiguration {
 
     @Value("${memento.tech.backoffice.media.mapping}")
     private String mediaMapping;
+
+    public BackofficeSecurityAutoconfiguration(
+            final BackofficeJwtAuthenticationFilter backofficeJwtAuthenticationFilter,
+            @Qualifier("backofficeAuthenticationProvider") final AuthenticationProvider backofficeAuthenticationProvider) {
+        this.backofficeJwtAuthenticationFilter = backofficeJwtAuthenticationFilter;
+        this.backofficeAuthenticationProvider = backofficeAuthenticationProvider;
+    }
 
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
