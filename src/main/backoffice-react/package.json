@@ -2,6 +2,7 @@
   "name": "backoffice-react",
   "version": "0.1.0",
   "private": true,
+  "homepage": "/backoffice",
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.3",
     "react": "^18.3.1",
