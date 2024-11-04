@@ -12,7 +12,7 @@ import RefreshIcon from "./icons/RefreshIcon";
 const ConsoleNav = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const searchParams = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [entityName, setEntityName] = useState(searchParams.get("entityName"));
 
   useEffect(() => {
