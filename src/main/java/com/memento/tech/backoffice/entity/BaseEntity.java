@@ -24,19 +24,19 @@ public class BaseEntity {
     @UuidGenerator
     @GeneratedValue(strategy = GenerationType.UUID)
     @BackofficeOrderPriority(-1001)
-    @BackofficeTitle(title = "ID")
+    @BackofficeTitle("ID")
     @OrderBy
     private String id;
 
     @Column(updatable = false)
     @CreationTimestamp
     @BackofficeOrderPriority(-1000)
-    @BackofficeTitle(title = "Created at")
+    @BackofficeTitle("Created at")
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
     @BackofficeOrderPriority(-1000)
-    @BackofficeTitle(title = "Updated at")
+    @BackofficeTitle("Updated at")
     @BackofficeForbidUpdate
     private LocalDateTime updatedAt;
 }

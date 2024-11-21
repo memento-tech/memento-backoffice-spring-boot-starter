@@ -1,6 +1,6 @@
 package com.memento.tech.backoffice.handler.impl;
 
-import com.memento.tech.backoffice.annotations.BackofficeCreationFieldExclude;
+import com.memento.tech.backoffice.annotations.BackofficeDisableCreation;
 import com.memento.tech.backoffice.annotations.BackofficeExclude;
 import com.memento.tech.backoffice.annotations.BackofficeFieldForShowInList;
 import com.memento.tech.backoffice.annotations.BackofficeGroup;
@@ -47,7 +47,7 @@ public class DefaultEntityAnnotationHandler implements EntityAnnotationHandler {
     }
 
     private void handleEntityCreationDisable(EntitySettings entitySettings, Class<?> entityClass) {
-        entitySettings.setDisableCreation(entityClass.isAnnotationPresent(BackofficeCreationFieldExclude.class));
+        entitySettings.setDisableCreation(entityClass.isAnnotationPresent(BackofficeDisableCreation.class));
     }
 
     private void handleEntityOrder(EntitySettings entitySettings, Class<?> entityClass) {
@@ -60,7 +60,7 @@ public class DefaultEntityAnnotationHandler implements EntityAnnotationHandler {
 
     private void handleEntityTitle(EntitySettings entitySettings, Class<?> entityClass) {
         var title = Optional.ofNullable(entityClass.getAnnotation(BackofficeTitle.class))
-                .map(BackofficeTitle::title)
+                .map(BackofficeTitle::value)
                 .orElse(entityClass.getSimpleName());
 
         entitySettings.setTitle(title);
@@ -68,7 +68,7 @@ public class DefaultEntityAnnotationHandler implements EntityAnnotationHandler {
 
     private void handleEntityGroup(EntitySettings entitySettings, Class<?> entityClass) {
         var group = Optional.ofNullable(entityClass.getAnnotation(BackofficeGroup.class))
-                .map(BackofficeGroup::groupName)
+                .map(BackofficeGroup::value)
                 .orElse(StringUtils.EMPTY);
 
         entitySettings.setEntityGroup(group);

@@ -44,7 +44,7 @@ public class DefaultFieldAnnotationHandler implements FieldAnnotationHandler {
 
     private void handleFieldTitle(EntityFieldSettings fieldSettings, Field field) {
         var title = Optional.ofNullable(field.getAnnotation(BackofficeTitle.class))
-                .map(BackofficeTitle::title)
+                .map(BackofficeTitle::value)
                 .orElse(field.getName());
 
         fieldSettings.setName(title);
@@ -60,6 +60,8 @@ public class DefaultFieldAnnotationHandler implements FieldAnnotationHandler {
 
     private void handleForbidUpdate(EntityFieldSettings fieldSettings, Field field) {
         Optional.ofNullable(field.getAnnotation(BackofficeForbidUpdate.class))
-                .ifPresent(forbidUpdate -> fieldSettings.setUpdatable(false));
+                .ifPresentOrElse(
+                        forbidUpdate -> fieldSettings.setUpdatable(false),
+                        () -> fieldSettings.setUpdatable(true));
     }
 }

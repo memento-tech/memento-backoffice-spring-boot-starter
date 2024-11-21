@@ -1,5 +1,6 @@
 package com.memento.tech.backoffice.configuration;
 
+import com.memento.tech.backoffice.repository.BackofficeUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -11,6 +12,7 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
@@ -25,6 +27,8 @@ public class BackofficeSecurityAutoconfiguration {
     private final BackofficeJwtAuthenticationFilter backofficeJwtAuthenticationFilter;
 
     private final AuthenticationProvider backofficeAuthenticationProvider;
+
+    private final BackofficeUserRepository backofficeUserRepository;
 
     @Value("${memento.tech.backoffice.media.mapping}")
     private String mediaMapping;
@@ -59,5 +63,11 @@ public class BackofficeSecurityAutoconfiguration {
                 .authenticationProvider(backofficeAuthenticationProvider)
                 .addFilterBefore(backofficeJwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class) // Add JWT filter
                 .build();
+    }
+
+    @Bean("backofficeUserDetailsService")
+    public UserDetailsService userDetailsService() {
+        return username -> backofficeUserRepository.findByUsername(username)
+                .orElse(null);
     }
 }

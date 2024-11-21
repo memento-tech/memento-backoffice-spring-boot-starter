@@ -1,5 +1,6 @@
 package com.memento.tech.backoffice.service.impl;
 
+import com.memento.tech.backoffice.exception.BackofficeException;
 import com.memento.tech.backoffice.service.FileStorageService;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,8 @@ import java.nio.file.StandardCopyOption;
 import java.util.Objects;
 import java.util.UUID;
 
+import static com.memento.tech.backoffice.exception.ExceptionCodeConstants.INTERNAL_BACKOFFICE_ERROR;
+
 @Service
 @ConditionalOnProperty(name = "memento.tech.backoffice.media.storage.enabled", havingValue = "true")
 @RequiredArgsConstructor
@@ -37,7 +40,7 @@ public class DefaultFileStorageService implements FileStorageService {
     @Override
     public byte[] getFile(String fileName) throws IOException {
         if (StringUtils.isBlank(fileName)) {
-            throw new IllegalStateException("BACKOFFICE: Multipart file is empty!");
+            throw new BackofficeException("BACKOFFICE: Multipart file is empty!", INTERNAL_BACKOFFICE_ERROR);
         }
 
         Path filePath = Paths.get(getUploadFolderDestination()).resolve(fileName).normalize();
@@ -57,7 +60,7 @@ public class DefaultFileStorageService implements FileStorageService {
         Objects.requireNonNull(multipartFile);
 
         if (multipartFile.isEmpty()) {
-            throw new IllegalStateException("BACKOFFICE: Multipart file is empty!");
+            throw new BackofficeException("BACKOFFICE: Multipart file is empty!", INTERNAL_BACKOFFICE_ERROR);
         }
 
         var fileName = UUID.randomUUID() + "-" + multipartFile.getOriginalFilename();
@@ -74,7 +77,7 @@ public class DefaultFileStorageService implements FileStorageService {
     @Override
     public void removeFile(String fileName) throws IOException {
         if (StringUtils.isBlank(fileName)) {
-            throw new IllegalArgumentException("BACKOFFICE: File name can not be empty string.");
+            throw new IOException("BACKOFFICE: File name can not be empty string.");
         }
 
         Path filePath = Paths.get(getUploadFolderDestination()).resolve(fileName).normalize();

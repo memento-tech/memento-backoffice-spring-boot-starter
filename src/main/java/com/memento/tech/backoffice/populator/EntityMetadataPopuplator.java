@@ -4,12 +4,12 @@ import com.memento.tech.backoffice.dto.EntityMetadata;
 import com.memento.tech.backoffice.entity.EntitySettings;
 import com.memento.tech.backoffice.exception.BackofficeException;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
 import static com.memento.tech.backoffice.exception.ExceptionCodeConstants.INTERNAL_BACKOFFICE_ERROR;
+import static org.apache.commons.collections4.CollectionUtils.emptyIfNull;
 
 @Service
 @RequiredArgsConstructor
@@ -29,7 +29,7 @@ public class EntityMetadataPopuplator {
                 .map(entityFieldMetadataPopulator::populateFieldMetadata)
                 .toList();
 
-        var widgetsMetadata = CollectionUtils.emptyIfNull(entitySettings.getEntityWidgets())
+        var widgetsMetadata = emptyIfNull(entitySettings.getEntityWidgets())
                 .stream()
                 .map(widgetMetadataPopulator::populateWidgetMetadata)
                 .toList();

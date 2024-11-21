@@ -18,7 +18,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class BackofficeAuthenticationProvider implements AuthenticationProvider {
 
-    private final UserDetailsService userDetailsService;
+    private final UserDetailsService backofficeUserDetailsService;
 
     private final PasswordEncoder passwordEncoder;
 
@@ -27,7 +27,7 @@ public class BackofficeAuthenticationProvider implements AuthenticationProvider 
         var username = authentication.getName();
         var password = (String) authentication.getCredentials();
 
-        var user = userDetailsService.loadUserByUsername(username);
+        var user = backofficeUserDetailsService.loadUserByUsername(username);
 
         if (Objects.nonNull(user) && passwordEncoder.matches(password, user.getPassword())) {
             if (user.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {

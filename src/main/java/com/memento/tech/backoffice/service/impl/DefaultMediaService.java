@@ -1,6 +1,7 @@
 package com.memento.tech.backoffice.service.impl;
 
 import com.memento.tech.backoffice.entity.Media;
+import com.memento.tech.backoffice.exception.BackofficeException;
 import com.memento.tech.backoffice.repository.MediaRepository;
 import com.memento.tech.backoffice.service.FileStorageService;
 import com.memento.tech.backoffice.service.MediaService;
@@ -14,6 +15,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.io.IOException;
 import java.util.Objects;
 import java.util.Optional;
+
+import static com.memento.tech.backoffice.exception.ExceptionCodeConstants.INTERNAL_BACKOFFICE_ERROR;
 
 @Service
 @RequiredArgsConstructor
@@ -88,7 +91,7 @@ public class DefaultMediaService implements MediaService {
     @Override
     public Media saveMedia(final MultipartFile multipartFile, final String mediaDescription) throws IOException {
         if (multipartFile.isEmpty()) {
-            throw new IllegalStateException("BACKOFFICE: Multipart file should not be null.");
+            throw new BackofficeException("BACKOFFICE: Multipart file should not be null.", INTERNAL_BACKOFFICE_ERROR);
         }
 
         var fileName = fileStorageService.saveFile(multipartFile);
