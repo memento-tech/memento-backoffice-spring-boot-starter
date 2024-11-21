@@ -36,12 +36,12 @@ public class TranslationWrapper extends BaseEntity {
     @Override
     public String toString() {
         return "TranslationWrapper{" +
-                "id=" + super.getId() + '\'' +
+                "id=" + super.getId() +
                 ", language=" + language +
-                ", translation='" + translation + '\'' +
-                ", createdAt='" + super.getCreatedAt() +
-                ", updatedAt='" + super.getUpdatedAt() +
-                '}';
+                ", translation=" + translation +
+                ", createdAt=" + super.getCreatedAt() +
+                ", updatedAt=" + super.getUpdatedAt() +
+                "}";
     }
 
     @Override

@@ -45,15 +45,15 @@ public class Widget extends BaseEntity {
     @Override
     public String toString() {
         return "Widget{" +
-                "id=" + super.getId() + '\'' +
-                ", widgetId='" + widgetId + '\'' +
+                "id=" + super.getId() +
+                ", widgetId=" + widgetId +
                 ", entityLevel=" + entityLevel +
                 ", recordLevel=" + recordLevel +
-                ", label='" + label + '\'' +
+                ", label=" + label +
                 ", widgetHandlerClass=" + widgetHandlerClass +
-                ", handlerMapping='" + handlerMapping + '\'' +
-                ", createdAt='" + super.getCreatedAt() +
-                ", updatedAt='" + super.getUpdatedAt() +
+                ", handlerMapping=" + handlerMapping +
+                ", createdAt=" + super.getCreatedAt() +
+                ", updatedAt=" + super.getUpdatedAt() +
                 '}';
     }
 

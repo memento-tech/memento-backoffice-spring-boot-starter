@@ -67,12 +67,12 @@ public class Translation extends BaseEntity {
     @Override
     public String toString() {
         return "Translation{" +
-                "id=" + super.getId() + '\'' +
-                ", code='" + code + '\'' +
+                "id=" + super.getId() +
+                ", code=" + code +
                 ", translationWrappers=" + translationWrappers +
-                ", createdAt='" + super.getCreatedAt() +
-                ", updatedAt='" + super.getUpdatedAt() +
-                '}';
+                ", createdAt=" + super.getCreatedAt() +
+                ", updatedAt=" + super.getUpdatedAt() +
+                "}";
     }
 
     @Override

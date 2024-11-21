@@ -34,11 +34,11 @@ public class BackofficeRole extends BaseEntity {
     @Override
     public String toString() {
         return "BackofficeRole{" +
-                "id=" + super.getId() + '\'' +
-                ", roleId='" + roleId +
-                ", createdAt='" + super.getCreatedAt() +
-                ", updatedAt='" + super.getUpdatedAt() +
-                '}';
+                "id=" + super.getId() +
+                ", roleId=" + roleId +
+                ", createdAt=" + super.getCreatedAt() +
+                ", updatedAt=" + super.getUpdatedAt() +
+                "}";
     }
 
     @Override

@@ -75,12 +75,12 @@ public class EntityFieldSettings extends BaseEntity implements Comparable<Entity
     @Override
     public String toString() {
         return "EntityFieldSettings{" +
-                "id=" + super.getId() + '\'' +
-                ", entityName='" + entityName + '\'' +
-                ", fieldId='" + fieldId + '\'' +
-                ", field='" + field + '\'' +
-                ", collectionFieldForShow='" + collectionFieldForShow + '\'' +
-                ", name='" + name + '\'' +
+                "id=" + super.getId() +
+                ", entityName=" + entityName +
+                ", fieldId=" + fieldId +
+                ", field=" + field +
+                ", collectionFieldForShow=" + collectionFieldForShow +
+                ", name=" + name +
                 ", excludeField=" + excludeField +
                 ", creationExcludeField=" + creationExcludeField +
                 ", fieldOrder=" + fieldOrder +
@@ -97,9 +97,9 @@ public class EntityFieldSettings extends BaseEntity implements Comparable<Entity
                 ", isEnumerated=" + isEnumerated +
                 ", enumClass=" + enumClass +
                 ", fieldClass=" + fieldClass +
-                ", createdAt='" + super.getCreatedAt() +
-                ", updatedAt='" + super.getUpdatedAt() +
-                '}';
+                ", createdAt=" + super.getCreatedAt() +
+                ", updatedAt=" + super.getUpdatedAt() +
+                "}";
     }
 
     @Override

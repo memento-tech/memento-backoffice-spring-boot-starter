@@ -64,13 +64,13 @@ public class BackofficeUser extends BaseEntity implements UserDetails {
     public String toString() {
         return "BackofficeUser{" +
                 "id=" + super.getId() +
-                ", username='" + username +
-                ", password='" + password +
-                ", role=" + role +
+                ", username=" + username +
+                ", password=" + password +
+                ", assignedRoles=" + assignedRoles +
                 ", enabled=" + enabled +
-                ", createdAt='" + super.getCreatedAt() +
-                ", updatedAt='" + super.getUpdatedAt() +
-                '}';
+                ", createdAt=" + super.getCreatedAt() +
+                ", updatedAt=" + super.getUpdatedAt() +
+                "}";
     }
 
     @Override
@@ -79,6 +79,6 @@ public class BackofficeUser extends BaseEntity implements UserDetails {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         BackofficeUser that = (BackofficeUser) o;
-        return enabled == that.enabled && Objects.equals(username, that.username) && Objects.equals(password, that.password) && Objects.equals(role, that.role);
+        return enabled == that.enabled && Objects.equals(username, that.username) && Objects.equals(password, that.password) && Objects.equals(assignedRoles, that.assignedRoles);
     }
 }

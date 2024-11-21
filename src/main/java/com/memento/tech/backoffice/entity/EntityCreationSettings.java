@@ -35,12 +35,12 @@ public class EntityCreationSettings extends BaseEntity {
     @Override
     public String toString() {
         return "EntityCreationSettings{" +
-                "id=" + super.getId() + '\'' +
+                "id=" + super.getId() +
                 ", allowCreation=" + allowCreation +
                 ", creationFields=" + creationFields +
-                ", createdAt='" + super.getCreatedAt() +
-                ", updatedAt='" + super.getUpdatedAt() +
-                '}';
+                ", createdAt=" + super.getCreatedAt() +
+                ", updatedAt=" + super.getUpdatedAt() +
+                "}";
     }
 
     @Override

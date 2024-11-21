@@ -61,17 +61,17 @@ public class Media extends BaseEntity {
     @Override
     public String toString() {
         return "Media{" +
-                "id=" + super.getId() + '\'' +
-                ", name='" + name + '\'' +
-                ", originalFileName='" + originalFileName + '\'' +
-                ", description='" + description + '\'' +
-                ", mediaExtension='" + mediaExtension + '\'' +
+                "id=" + super.getId() +
+                ", name=" + name +
+                ", originalFileName=" + originalFileName +
+                ", description=" + description +
+                ", mediaExtension=" + mediaExtension +
                 ", mediaSize=" + mediaSize +
-                ", mediaUrl='" + mediaUrl + '\'' +
-                ", contentType='" + contentType + '\'' +
-                ", createdAt='" + super.getCreatedAt() +
-                ", updatedAt='" + super.getUpdatedAt() +
-                '}';
+                ", mediaUrl=" + mediaUrl +
+                ", contentType=" + contentType +
+                ", createdAt=" + super.getCreatedAt() +
+                ", updatedAt=" + super.getUpdatedAt() +
+                "}";
     }
 
     @Override

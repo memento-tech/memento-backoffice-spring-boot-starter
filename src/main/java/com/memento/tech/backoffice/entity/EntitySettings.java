@@ -73,22 +73,25 @@ public class EntitySettings extends BaseEntity implements Comparable<EntitySetti
     @Override
     public String toString() {
         return "EntitySettings{" +
-                "entityName='" + entityName + '\'' +
-                ", title='" + title + '\'' +
+                "id=" + super.getId() +
+                ", entityName=" + entityName +
+                ", title=" + title +
                 ", excludeEntity=" + excludeEntity +
                 ", fullEntityExclude=" + fullEntityExclude +
                 ", disableCreation=" + disableCreation +
-                ", tableName='" + tableName + '\'' +
+                ", tableName=" + tableName +
                 ", entityOrder=" + entityOrder +
-                ", entityGroup='" + entityGroup + '\'' +
-                ", fieldForShowInList='" + fieldForShowInList + '\'' +
+                ", entityGroup=" + entityGroup +
+                ", fieldForShowInList=" + fieldForShowInList +
                 ", translation=" + translation +
                 ", media=" + media +
                 ", fieldSettings=" + fieldSettings +
                 ", creationSettings=" + creationSettings +
                 ", entityClass=" + entityClass +
                 ", entityWidgets=" + entityWidgets +
-                '}';
+                ", createdAt=" + super.getCreatedAt() +
+                ", updatedAt=" + super.getUpdatedAt() +
+                "}";
     }
 
     @Override
