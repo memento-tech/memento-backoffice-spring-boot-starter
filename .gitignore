@@ -39,6 +39,12 @@ replay_pid*
 
 # production
 /build
+**/target
+**/build
+
+#react
+**/backoffice-react/node
+**/backoffice-react/node_modules
 
 # misc
 .DS_Store

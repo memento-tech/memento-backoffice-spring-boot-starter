@@ -7,6 +7,7 @@ import com.memento.tech.backoffice.converter.TranslationConverter;
 import com.memento.tech.backoffice.deserializer.EntityWrapperDeserializer;
 import com.memento.tech.backoffice.dto.EntityWrapper;
 import com.memento.tech.backoffice.interceptor.RequestTranslationInterceptor;
+import com.memento.tech.backoffice.repository.BackofficeUserRepository;
 import com.memento.tech.backoffice.service.EntityService;
 import com.memento.tech.backoffice.service.EntitySettingsService;
 import jakarta.annotation.PostConstruct;
@@ -22,6 +23,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.Ordered;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -38,15 +44,11 @@ import java.nio.file.Paths;
 @EntityScan("com.memento.tech.backoffice.entity")
 @EnableJpaRepositories(basePackages = {"com.memento.tech.backoffice.repository"})
 @ConfigurationProperties
+@EnableWebSecurity
 public class BackofficeAutoconfiguration implements WebMvcConfigurer {
 
-    private final EntitySettingsService entitySettingsService;
-    private final EntityService entityService;
-    private final PasswordEncoder passwordEncoder;
-    private final TranslationConverter translationConverter;
-    private final MediaConverter mediaConverter;
-    private final ModelMapper modelMapper;
     private final RequestTranslationInterceptor requestTranslationInterceptor;
+    private final BackofficeUserRepository backofficeUserRepository;
 
     @Value("${memento.tech.backoffice.translation.enabled:false}")
     private boolean translationsEnabled;
@@ -54,22 +56,57 @@ public class BackofficeAutoconfiguration implements WebMvcConfigurer {
     @Value("${memento.tech.backoffice.media.file.import.upload.directory}")
     private String uploadDirectory;
 
+    @Value("${memento.tech.backoffice.media.storage.enabled:false}")
+    private boolean mediaStorageEnabled;
+
     @Value("${memento.tech.backoffice.media.mapping}")
     private String mediaMapping;
 
     @Bean
-    public Module customDeserializer() {
+    public ModelMapper backofficeModelMapper(
+            final TranslationConverter translationConverter,
+            final MediaConverter mediaConverter
+    ) {
+        var backofficeModelMapper = new ModelMapper();
+
+        if (translationsEnabled) {
+            backofficeModelMapper.addConverter(translationConverter);
+        }
+
+        if (mediaStorageEnabled) {
+            backofficeModelMapper.addConverter(mediaConverter);
+        }
+
+        return backofficeModelMapper;
+    }
+
+    @Bean
+    public Module customDeserializer(
+            final EntitySettingsService entitySettingsService,
+            final EntityService entityService
+    ) {
         var module = new SimpleModule();
-        module.addDeserializer(EntityWrapper.class, new EntityWrapperDeserializer(entitySettingsService, entityService, passwordEncoder));
+        module.addDeserializer(EntityWrapper.class, new EntityWrapperDeserializer(entitySettingsService, entityService, backofficePasswordEncoder()));
         return module;
     }
 
-    @PostConstruct
-    public void configureModelMapper() {
-        if (translationsEnabled) {
-            modelMapper.addConverter(translationConverter);
-            modelMapper.addConverter(mediaConverter);
-        }
+    @Bean("backofficeUserDetailsService")
+    public UserDetailsService backofficeUserDetailsService() {
+        return username -> backofficeUserRepository.findByUsername(username)
+                .orElse(null);
+    }
+
+    @Bean("backofficePasswordEncoder")
+    public PasswordEncoder backofficePasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public AuthenticationProvider backofficeAuthenticationProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(backofficeUserDetailsService());
+        authProvider.setPasswordEncoder(backofficePasswordEncoder());
+        return authProvider;
     }
 
     @Override
@@ -82,10 +119,12 @@ public class BackofficeAutoconfiguration implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        Path mediaDirectory = Paths.get(uploadDirectory).toAbsolutePath().normalize();
-        String mediaPath = mediaDirectory.toUri().toString();
+        if (mediaStorageEnabled) {
+            Path mediaDirectory = Paths.get(uploadDirectory).toAbsolutePath().normalize();
+            String mediaPath = mediaDirectory.toUri().toString();
 
-        registry.addResourceHandler(mediaMapping + "/**")
-                .addResourceLocations(mediaPath);
+            registry.addResourceHandler(mediaMapping + "/**")
+                    .addResourceLocations(mediaPath);
+        }
     }
 }

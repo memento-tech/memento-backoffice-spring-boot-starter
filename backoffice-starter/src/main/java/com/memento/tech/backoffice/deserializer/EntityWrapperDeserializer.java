@@ -46,7 +46,7 @@ public final class EntityWrapperDeserializer extends JsonDeserializer<EntityWrap
 
     private final EntityService entityService;
 
-    private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder backofficePasswordEncoder;
 
     private ObjectMapper objectMapper;
 
@@ -94,7 +94,7 @@ public final class EntityWrapperDeserializer extends JsonDeserializer<EntityWrap
                 }
 
                 if (fieldSettings.isPassword() && StringUtils.isNoneBlank((String) propertyValue)) {
-                    propertyValue = passwordEncoder.encode((String) propertyValue);
+                    propertyValue = backofficePasswordEncoder.encode((String) propertyValue);
                 }
             } else {
                 try {

@@ -27,7 +27,7 @@ public final class BasicEntityValidator {
 
     private final DefaultEntityValidators entityValidators;
 
-    private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder backofficePasswordEncoder;
 
     @SuppressWarnings("unchecked")
     public void validateEntity(BaseEntity entity, EntitySettings entitySettings) {
@@ -105,7 +105,7 @@ public final class BasicEntityValidator {
 
         if (passwordChanged && Objects.nonNull(persistentEntity) && StringUtils.isNotBlank(newPassword)) {
 
-            if (passwordEncoder.matches(newPassword, persistedPassword)) {
+            if (backofficePasswordEncoder.matches(newPassword, persistedPassword)) {
                 throw new BackofficeException(
                         "BasicEntityValidator::validateNonOptionalField : Password can not be the same.",
                         ENTITY_SAVE_PROPERTY_PASSWORD_IS_SAME);
