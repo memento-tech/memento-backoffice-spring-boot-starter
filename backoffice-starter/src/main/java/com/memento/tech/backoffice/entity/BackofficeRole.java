@@ -1,6 +1,8 @@
 package com.memento.tech.backoffice.entity;
 
 import com.memento.tech.backoffice.annotations.BackofficeExclude;
+import com.memento.tech.backoffice.annotations.BackofficeGroup;
+import com.memento.tech.backoffice.annotations.BackofficeTitle;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Index;
 import jakarta.persistence.Table;
@@ -22,9 +24,11 @@ import java.util.Objects;
         @Index(columnList = "id", unique = true),
 })
 
-@BackofficeExclude
-public class BackofficeRole extends BaseEntity {
+@BackofficeTitle("Backoffice Role")
+@BackofficeGroup(title = "Backoffice")
+public class BackofficeRole extends BaseEntity implements BackofficeConfigurationMarker {
 
+    @BackofficeTitle("Role ID")
     private String roleId;
 
     public SimpleGrantedAuthority getAuthority() {

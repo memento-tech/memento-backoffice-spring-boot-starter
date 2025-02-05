@@ -1,7 +1,6 @@
 package com.memento.tech.backoffice.controller;
 
 import com.memento.tech.backoffice.dto.LanguageDTO;
-import com.memento.tech.backoffice.dto.LanguageDTO;
 import com.memento.tech.backoffice.dto.SaveTranslationDTO;
 import com.memento.tech.backoffice.service.LanguageService;
 import com.memento.tech.backoffice.service.TranslationService;
@@ -30,13 +29,13 @@ public class TranslationsController {
 
     private final LanguageService languageService;
 
-    private final ModelMapper modelMapper;
+    private final ModelMapper backofficeModelMapper;
 
     @GetMapping("/lang")
     public List<LanguageDTO> getAllLanguages() {
         return CollectionUtils.emptyIfNull(languageService.getAllLanguages())
                 .stream()
-                .map(language -> modelMapper.map(language, LanguageDTO.class))
+                .map(language -> backofficeModelMapper.map(language, LanguageDTO.class))
                 .toList();
     }
 

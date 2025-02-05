@@ -1,6 +1,6 @@
 package com.memento.tech.backoffice.controller;
 
-import com.memento.tech.backoffice.dto.EntityMetadata;
+import com.memento.tech.backoffice.dto.MetadataWrapper;
 import com.memento.tech.backoffice.service.EntityMetadataService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,12 +17,12 @@ public class EntityMetadataController {
     public final EntityMetadataService entityMetadataService;
 
     @GetMapping("/refresh")
-    public List<EntityMetadata> refreshEntitySettings() {
+    public List<MetadataWrapper> refreshEntitySettings() {
         return entityMetadataService.getRefreshedEntityMetadata();
     }
 
     @GetMapping("/all")
-    public List<EntityMetadata> getEntitiesDetails() {
+    public List<MetadataWrapper> getEntitiesDetails() {
         return entityMetadataService.getAllEntityMetadata();
     }
 }

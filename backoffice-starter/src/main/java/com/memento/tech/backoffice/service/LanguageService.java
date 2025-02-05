@@ -11,5 +11,5 @@ public interface LanguageService {
 
     Optional<Language> getLanguageForIsoCode(String langIsoCode);
 
-    Optional<Language> getDefaultLanguage();
+    String getDefaultLanguageIsoCode();
 }

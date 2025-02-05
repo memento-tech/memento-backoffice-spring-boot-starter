@@ -25,8 +25,7 @@ const CreationPopup = () => {
           onSaveSuccess={onSaveSuccess}
         />
       ));
-    }
-    if (entityMetadata.media) {
+    } else if (entityMetadata.media) {
       addPopup((key, zIndex, closePopup) => (
         <MediaCreationPopup
           key={key}

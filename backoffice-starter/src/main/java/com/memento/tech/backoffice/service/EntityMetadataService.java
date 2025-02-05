@@ -1,13 +1,14 @@
 package com.memento.tech.backoffice.service;
 
 import com.memento.tech.backoffice.dto.EntityMetadata;
+import com.memento.tech.backoffice.dto.MetadataWrapper;
 
 import java.util.List;
 
 public interface EntityMetadataService {
 
-    List<EntityMetadata> getAllEntityMetadata();
+    List<MetadataWrapper> getAllEntityMetadata();
 
-    List<EntityMetadata> getRefreshedEntityMetadata();
+    List<MetadataWrapper> getRefreshedEntityMetadata();
 
 }

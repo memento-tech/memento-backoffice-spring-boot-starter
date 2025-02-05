@@ -1,6 +1,8 @@
 package com.memento.tech.backoffice.entity;
 
 import com.memento.tech.backoffice.annotations.BackofficeExclude;
+import com.memento.tech.backoffice.annotations.BackofficeOrderPriority;
+import com.memento.tech.backoffice.annotations.BackofficeTitle;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Index;
 import jakarta.persistence.ManyToMany;
@@ -25,11 +27,14 @@ import java.util.Set;
 })
 
 @BackofficeExclude
-public class EntityCreationSettings extends BaseEntity {
+public class EntityCreationSettings extends BaseEntity implements BackofficeConfigurationMarker {
 
+    @BackofficeTitle("Allow creation")
+    @BackofficeOrderPriority(100)
     private boolean allowCreation;
 
     @ManyToMany
+    @BackofficeTitle("Creation Fields")
     private Set<EntityFieldSettings> creationFields;
 
     @Override

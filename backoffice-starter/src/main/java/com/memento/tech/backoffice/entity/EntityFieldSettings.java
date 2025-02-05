@@ -1,6 +1,9 @@
 package com.memento.tech.backoffice.entity;
 
 import com.memento.tech.backoffice.annotations.BackofficeExclude;
+import com.memento.tech.backoffice.annotations.BackofficeOrderPriority;
+import com.memento.tech.backoffice.annotations.BackofficeTitle;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Index;
 import jakarta.persistence.Table;
@@ -23,48 +26,86 @@ import java.util.Objects;
 })
 
 @BackofficeExclude
-public class EntityFieldSettings extends BaseEntity implements Comparable<EntityFieldSettings> {
+public class EntityFieldSettings extends BaseEntity implements Comparable<EntityFieldSettings>, BackofficeConfigurationMarker {
 
+    @Column(nullable = false)
+    @BackofficeTitle("Entity Name")
+    @BackofficeOrderPriority(101)
     private String entityName;
 
+    @Column(nullable = false, unique = true)
+    @BackofficeTitle("Field ID")
+    @BackofficeOrderPriority(100)
     private String fieldId;
 
+    @BackofficeExclude
     private String field;
 
+    @BackofficeTitle("Collection Title For Show")
     private String collectionFieldForShow;
 
+    @BackofficeTitle("Field Name")
+    @BackofficeOrderPriority(99)
     private String name;
 
+    @BackofficeTitle("Field Exclude")
     private boolean excludeField;
 
+    @BackofficeTitle("Creation Field Exclude")
     private boolean creationExcludeField;
 
+    @BackofficeTitle("Field Order")
     private int fieldOrder;
 
+    @BackofficeTitle("Unique")
+    @BackofficeOrderPriority(97)
     private boolean uniqueField;
 
+    @BackofficeTitle("Required")
+    @BackofficeOrderPriority(97)
     private boolean required;
 
+    @BackofficeTitle("Optional")
+    @BackofficeOrderPriority(96)
     private boolean optional;
 
+    @Column(updatable = false)
+    @BackofficeTitle("Change Optional Allowed")
+    @BackofficeOrderPriority(95)
     private boolean changeOptionalAllowed;
 
+    @BackofficeTitle("Updatable")
+    @BackofficeOrderPriority(94)
     private boolean updatable;
 
+    @Column(updatable = false)
+    @BackofficeTitle("Change Updatable Allowed")
+    @BackofficeOrderPriority(93)
     private boolean changeUpdatableAllowed;
 
+    @Column(updatable = false)
+    @BackofficeTitle("Basic")
+    @BackofficeOrderPriority(98)
     private boolean basic;
 
+    @BackofficeTitle("Multivalue Field")
+    @BackofficeOrderPriority(98)
     private boolean multivalue;
 
+    @BackofficeTitle("Collection Class")
     private Class<?> collectionClass;
 
+    @BackofficeExclude
     private boolean isPassword;
 
+    @BackofficeExclude
     private boolean isEnumerated;
 
+    @BackofficeExclude
     private boolean enumClass;
 
+    @BackofficeTitle("Field Class")
+    @BackofficeOrderPriority(92)
     private Class<?> fieldClass;
 
     @Override

@@ -24,7 +24,7 @@ import java.util.UUID;
 import static com.memento.tech.backoffice.exception.ExceptionCodeConstants.INTERNAL_BACKOFFICE_ERROR;
 
 @Service
-@ConditionalOnProperty(name = "memento.tech.backoffice.media.storage.enabled", havingValue = "true")
+@ConditionalOnProperty(name = {"memento.tech.backoffice.media.enabled", "memento.tech.backoffice.media.internal.file.storage.enabled"}, havingValue = "true")
 @RequiredArgsConstructor
 @Slf4j
 public class DefaultFileStorageService implements FileStorageService {

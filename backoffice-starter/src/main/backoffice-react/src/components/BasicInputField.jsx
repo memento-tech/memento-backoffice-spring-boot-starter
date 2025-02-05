@@ -137,5 +137,4 @@ const InputLabel = styled.p`
   color: #606160;
   z-index: -1;
   font-style: italic;
-  font-size: 1.1rem;
 `;

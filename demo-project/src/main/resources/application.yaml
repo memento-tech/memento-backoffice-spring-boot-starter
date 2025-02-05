@@ -3,8 +3,11 @@ memento:
     backoffice:
       enabled: true
       media:
-        storage:
-          enabled: true
+        enabled: true
+        internal:
+          file:
+            storage:
+              enabled: true
         mapping: /media
         file:
           import:
@@ -12,12 +15,15 @@ memento:
               directory: ../media
       translation:
         enabled: true
-        defaultLanguage: us
+        default:
+          language: en
         useDefaultIfBlank: true
-      jwt:
+      auth:
         token:
           secret: 357638792F423F4428472B4B6250655368566D597133743677397A2443424567
-          expiry: 86400
+        cookie:
+          name: backofficeTokenCookie
+          expiry: 31536000
 
 debug: true
 

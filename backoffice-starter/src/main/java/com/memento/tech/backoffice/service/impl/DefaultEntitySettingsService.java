@@ -17,6 +17,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -142,7 +143,6 @@ public class DefaultEntitySettingsService implements EntitySettingsService {
     private List<EntitySettings> sortEntitySettings(List<EntitySettings> unsortedEntitySettings) {
         return emptyIfNull(unsortedEntitySettings)
                 .stream()
-                .sorted()
                 .sorted((first, second) -> Integer.compare(second.getEntityOrder(), first.getEntityOrder()))
                 .toList();
     }

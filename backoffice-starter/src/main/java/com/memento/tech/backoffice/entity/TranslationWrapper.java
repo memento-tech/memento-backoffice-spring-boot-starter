@@ -1,6 +1,8 @@
 package com.memento.tech.backoffice.entity;
 
 import com.memento.tech.backoffice.annotations.BackofficeExclude;
+import com.memento.tech.backoffice.annotations.BackofficeOrderPriority;
+import com.memento.tech.backoffice.annotations.BackofficeTitle;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Index;
@@ -25,12 +27,15 @@ import java.util.Objects;
 })
 
 @BackofficeExclude
-public class TranslationWrapper extends BaseEntity {
+public class TranslationWrapper extends BaseEntity implements BackofficeConfigurationMarker {
 
     @ManyToOne
+    @BackofficeOrderPriority(100)
+    @BackofficeTitle("Language")
     private Language language;
 
     @Column(nullable = false, length = 1000)
+    @BackofficeTitle("Translation")
     private String translation;
 
     @Override

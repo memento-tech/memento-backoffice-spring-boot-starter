@@ -69,7 +69,6 @@ const ImportFileButtonLabel = styled.label`
   align-items: center;
   width: 100%;
   cursor: pointer;
-  font-size: 18px;
 
   &:hover {
     scale: 1.1;

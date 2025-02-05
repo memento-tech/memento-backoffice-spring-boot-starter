@@ -39,51 +39,12 @@ public class DefaultTranslationService implements TranslationService {
 
     @Override
     public String getTranslation(String translationCode) {
-        final var defaultLanguage = languageService.getDefaultLanguage()
-                .orElseThrow();
-
-        return getTranslation(translationCode, defaultLanguage.getLangIsoCode());
+        return getTranslationInternal(translationCode);
     }
 
     @Override
     public String getTranslation(String translationCode, Object... params) {
-        var translation = getTranslation(translationCode);
-
-        if (Objects.isNull(params) || params.length == 0) {
-            return translation;
-        }
-
-        return String.format(translation, params);
-    }
-
-    @Override
-    public String getTranslation(String translationCode, String defaultLangIsoCode) {
-        var translationWrapper = Optional.ofNullable(translationCode)
-                .filter(StringUtils::isNotBlank)
-                .flatMap(translationRepository::findByCode)
-                .orElseThrow(() -> new BackofficeException("Translation code can not be blank.", INTERNAL_BACKOFFICE_ERROR));
-
-        var result = getTranslationForLangIsoCode(translationWrapper, translationRequestData.getCurrentLangIsoCode());
-
-        if (StringUtils.isBlank(result) && useDefaultIfBlank) {
-            if (defaultLangIsoCode.equals("unknown")) {
-                log.error("BACKOFFICE: Please set up environment properties for translation default iso code using property [backoffice.translation.defaultLanguage]");
-            } else {
-                final var defaultLanguage = languageService.getLanguageForIsoCode(defaultLangIsoCode)
-                        .orElseThrow();
-
-                log.info("BACKOFFICE: Defaulting to default language with iso code [{}] for translation with code [{}].", defaultLanguage, translationCode);
-                result = getTranslationForLangIsoCode(translationWrapper, defaultLangIsoCode);
-            }
-        }
-
-
-        return result;
-    }
-
-    @Override
-    public String getTranslation(String translationCode, String defaultLangIsoCode, Object... params) {
-        var translation = getTranslation(translationCode, defaultLangIsoCode);
+        var translation = getTranslationInternal(translationCode);
 
         if (Objects.isNull(params) || params.length == 0) {
             return translation;
@@ -94,12 +55,7 @@ public class DefaultTranslationService implements TranslationService {
 
     @Override
     public String getTranslationForLangIsoCode(String translationCode, String langIsoCode) {
-        var translationWrapper = Optional.ofNullable(translationCode)
-                .filter(StringUtils::isNotBlank)
-                .flatMap(translationRepository::findByCode)
-                .orElseThrow(() -> new BackofficeException("", ""));
-
-        return getTranslationForLangIsoCode(translationWrapper, langIsoCode);
+        return getTranslationForLangIsoCodeInternal(translationCode, langIsoCode);
     }
 
     @Override
@@ -265,7 +221,43 @@ public class DefaultTranslationService implements TranslationService {
         }
     }
 
-    private String getTranslationForLangIsoCode(Translation translation, String langIsoCode) {
+    private String getTranslationInternal(String translationCode) {
+        return getTranslationForLangIsoCodeInternal(translationCode, translationRequestData.getCurrentLangIsoCode());
+    }
+
+    private String getTranslationForLangIsoCodeInternal(String translationCode, String langIsoCode) {
+        if (StringUtils.isBlank(translationCode)) {
+            throw new BackofficeException("Translation code can not be blank!", "");
+        }
+
+        if (StringUtils.isBlank(langIsoCode)) {
+            throw new BackofficeException("Lang iso code can not be blank!", "");
+        }
+
+        var translation = Optional.of(translationCode)
+                .filter(StringUtils::isNotBlank)
+                .flatMap(translationRepository::findByCode)
+                .orElse(null);
+
+        if (Objects.isNull(translation)) {
+            log.info("Translation entity not found for translation code [{}], returning translation code.", translationCode);
+            return translationCode;
+        }
+
+        var result = extractTranslationFromTranslationWrapper(translation, langIsoCode);
+
+        if (StringUtils.isBlank(result) && useDefaultIfBlank) {
+            result = extractTranslationFromTranslationWrapper(translation, languageService.getDefaultLanguageIsoCode());
+        }
+
+        if (StringUtils.isBlank(result)) {
+            result = translationCode;
+        }
+
+        return result;
+    }
+
+    private String extractTranslationFromTranslationWrapper(Translation translation, String langIsoCode) {
         var result = CollectionUtils.emptyIfNull(translation.getTranslationWrappers())
                 .stream()
                 .filter(translationWrapper -> translationWrapper.getLanguage().getLangIsoCode().equals(langIsoCode))

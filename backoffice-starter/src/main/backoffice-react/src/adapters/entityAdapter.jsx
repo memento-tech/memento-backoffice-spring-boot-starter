@@ -3,14 +3,20 @@ import API from "../config/api";
 export async function refreshEntityMetadata() {
   return API.get("/api/backoffice/metadata/refresh")
     .then((res) => {
+      var entityMetadatas = res.data.filter((value) => value.configurational)[0]
+        .groupMetadata;
+      var metadataWrappers = res.data.filter((value) => !value.configurational);
+
       return {
-        entityMetadata: res.data,
+        entityMetadatas: entityMetadatas,
+        metadataWrappers: metadataWrappers,
         exceptionMessage: "",
       };
     })
     .catch((res) => {
       return {
         entityMetadatas: [],
+        metadataWrappers: [],
         exceptionMessage: res.data?.exceptionMessage,
       };
     });
@@ -19,14 +25,20 @@ export async function refreshEntityMetadata() {
 export async function getEntityOverview() {
   return API.get("/api/backoffice/metadata/all")
     .then((res) => {
+      var entityMetadatas = res.data.filter((value) => value.configurational)[0]
+        .groupMetadata;
+      var metadataWrappers = res.data.filter((value) => !value.configurational);
+
       return {
-        entityMetadata: res.data,
+        entityMetadatas: entityMetadatas,
+        metadataWrappers: metadataWrappers,
         exceptionMessage: "",
       };
     })
     .catch((res) => {
       return {
         entityMetadatas: [],
+        metadataWrappers: [],
         exceptionMessage: res.data?.exceptionMessage,
       };
     });

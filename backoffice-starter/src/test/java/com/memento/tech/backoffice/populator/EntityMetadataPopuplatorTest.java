@@ -48,17 +48,16 @@ class EntityMetadataPopuplatorTest {
         var result = entityMetadataPopuplator.populateEntityMetadata(testEntitySettings, 1000);
 
         assertNotNull(result);
-        assertEquals(testEntitySettings.getEntityName(), result.entityName());
-        assertEquals(testEntitySettings.getTitle(), result.entityTitle());
-        assertEquals(testEntitySettings.getEntityGroup(), result.entityGroup());
-        assertEquals(testEntitySettings.getFieldForShowInList(), result.fieldForShowInList());
-        assertEquals(1000, result.numOfRecords());
-        assertTrue(result.exclude());
-        assertTrue(result.translation());
-        assertTrue(result.media());
-        assertNotNull(result.entityFields());
-        assertNull(result.creationFields());
-        assertNotNull(result.widgets());
+        assertEquals(testEntitySettings.getEntityName(), result.getEntityName());
+        assertEquals(testEntitySettings.getTitle(), result.getEntityTitle());
+        assertEquals(testEntitySettings.getFieldForShowInList(), result.getFieldForShowInList());
+        assertEquals(1000, result.getNumOfRecords());
+        assertTrue(result.isExclude());
+        assertTrue(result.isTranslation());
+        assertTrue(result.isMedia());
+        assertNotNull(result.getEntityFields());
+        assertNull(result.getCreationSettings());
+        assertNotNull(result.getWidgets());
     }
 
 }

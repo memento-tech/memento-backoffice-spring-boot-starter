@@ -44,51 +44,52 @@ const EntityCreationPopup = ({
   const getFields = () => {
     return (
       <PopupFieldsContainer>
-        {entityMetadata.entityFields.map((field, index) => {
-          if (field.basic) {
+        {entityMetadata.creationSettings.allowCreation &&
+          entityMetadata.entityFields.map((field, index) => {
+            if (field.basic) {
+              return (
+                <BasicInputField
+                  style={field.required ? { borderColor: "red" } : {}}
+                  key={index}
+                  placeholder={field.name}
+                  value={""}
+                  passwordType={"password" === field.id}
+                  onChange={(newValue) => {
+                    setData((prevData) => ({
+                      ...prevData,
+                      [field.id]: newValue,
+                    }));
+                  }}
+                  updatable={true}
+                />
+              );
+            }
             return (
-              <BasicInputField
-                style={field.required ? { borderColor: "red" } : {}}
+              <NonBasicFieldButton
                 key={index}
-                placeholder={field.name}
-                value={""}
-                passwordType={"password" === field.id}
-                onChange={(newValue) => {
+                field={field}
+                valueData={data[field.id]}
+                onSelect={(selectedData) => {
+                  setData((prevData) => ({
+                    ...prevData,
+                    [field.id]: selectedData,
+                  }));
+                }}
+                onRemove={() => {
+                  setData((prevData) => ({
+                    ...prevData,
+                    [field.id]: null,
+                  }));
+                }}
+                onMultivalueSelect={(newValue) => {
                   setData((prevData) => ({
                     ...prevData,
                     [field.id]: newValue,
                   }));
                 }}
-                updatable={true}
               />
             );
-          }
-          return (
-            <NonBasicFieldButton
-              key={index}
-              field={field}
-              valueData={data[field.id]}
-              onSelect={(selectedData) => {
-                setData((prevData) => ({
-                  ...prevData,
-                  [field.id]: selectedData,
-                }));
-              }}
-              onRemove={() => {
-                setData((prevData) => ({
-                  ...prevData,
-                  [field.id]: null,
-                }));
-              }}
-              onMultivalueSelect={(newValue) => {
-                setData((prevData) => ({
-                  ...prevData,
-                  [field.id]: newValue,
-                }));
-              }}
-            />
-          );
-        })}
+          })}
       </PopupFieldsContainer>
     );
   };

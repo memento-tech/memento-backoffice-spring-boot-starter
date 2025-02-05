@@ -5,6 +5,7 @@ import {
 } from "../../adapters/entityAdapter";
 
 const initialState = {
+  metadataWrappers: [],
   entityMetadatas: [],
   selectedEntityMetadata: null,
   loading: false,
@@ -30,7 +31,8 @@ export const fetchEntityMetadatas = createAsyncThunk(
     let response = await callEntityMetadataAPI(isRefresh);
 
     return {
-      entityMetadatas: response.entityMetadata,
+      entityMetadatas: response.entityMetadatas,
+      metadataWrappers: response.metadataWrappers,
       errorMessage: response.exceptionMessage,
     };
   }
@@ -47,6 +49,7 @@ export const entityMetadataSlice = createSlice({
       state.loading = false;
       if (action.payload.entityMetadatas) {
         state.entityMetadatas = action.payload.entityMetadatas;
+        state.metadataWrappers = action.payload.metadataWrappers;
         state.errorMessage = "";
       } else if (action.payload.errorMessage) {
         state.errorMessage = action.payload.errorMessage;
@@ -55,6 +58,7 @@ export const entityMetadataSlice = createSlice({
     builder.addCase(fetchEntityMetadatas.rejected, (state, action) => {
       state.loading = false;
       state.entityMetadatas = [];
+      state.metadataWrappers = [];
       state.errorMessage = "Fetch is rejected";
     });
   },

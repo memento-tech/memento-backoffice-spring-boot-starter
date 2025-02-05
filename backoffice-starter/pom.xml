@@ -200,7 +200,7 @@
                 <version>${maven-resources-plugin.version}</version>
                 <executions>
                     <execution>
-                        <id>Copy JavaScript app into SpringBoot</id>
+                        <id>Copy JavaScript app into SpringBoot target</id>
                         <phase>process-resources</phase>
                         <goals>
                             <goal>copy-resources</goal>

@@ -14,8 +14,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class TranslationConverter implements Converter<Translation, String> {
 
-    private static final String NON_FOUND_TRANSLATION = "Translation not found!";
-
     private final TranslationService translationService;
 
     @Override
@@ -23,7 +21,7 @@ public class TranslationConverter implements Converter<Translation, String> {
         var translationCode = Optional.ofNullable(context)
                 .map(MappingContext::getSource)
                 .map(Translation::getCode)
-                .orElseThrow(() -> new BackofficeException("Translation code not found", ""));
+                .orElseThrow(() -> new BackofficeException("Translation object not found in context.", ""));
 
         return translationService.getTranslation(translationCode);
     }

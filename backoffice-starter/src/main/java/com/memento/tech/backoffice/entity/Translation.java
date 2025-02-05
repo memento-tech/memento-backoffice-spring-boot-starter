@@ -1,5 +1,7 @@
 package com.memento.tech.backoffice.entity;
 
+import com.memento.tech.backoffice.annotations.BackofficeOrderPriority;
+import com.memento.tech.backoffice.annotations.BackofficeTitle;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -30,12 +32,15 @@ import static java.util.Objects.requireNonNull;
 @Table(indexes = {
         @Index(columnList = "id", unique = true),
 })
-public class Translation extends BaseEntity {
+public class Translation extends BaseEntity implements BackofficeConfigurationMarker {
 
     @Column(nullable = false, unique = true)
+    @BackofficeOrderPriority(100)
+    @BackofficeTitle("Translation Code")
     private String code;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @BackofficeTitle("Translations")
     private List<TranslationWrapper> translationWrappers;
 
     public void addOrUpdateTranslation(final TranslationWrapper translationWrapper) {

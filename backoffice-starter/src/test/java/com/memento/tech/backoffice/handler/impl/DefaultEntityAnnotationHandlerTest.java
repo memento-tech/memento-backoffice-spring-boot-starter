@@ -12,7 +12,6 @@ import com.memento.tech.backoffice.entity.BaseEntity;
 import com.memento.tech.backoffice.entity.EntitySettings;
 import com.memento.tech.backoffice.repository.WidgetRepository;
 import com.memento.tech.backoffice.widget.RecordFunctionButtonHandler;
-import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -134,7 +133,7 @@ class DefaultEntityAnnotationHandlerTest {
 
     @Test
     void testHandleEntityAnnotation_handleEntityGroupAnnotated() {
-        @BackofficeGroup("testGroup")
+        @BackofficeGroup(title = "testGroup")
         class OrderedClass {
 
         }
@@ -152,7 +151,7 @@ class DefaultEntityAnnotationHandlerTest {
 
         defaultEntityAnnotationHandler.handleEntityAnnotation(entitySettings, NonAnnotatedClass.class);
 
-        assertEquals(StringUtils.EMPTY, entitySettings.getEntityGroup());
+        assertNull(entitySettings.getEntityGroup());
     }
 
 

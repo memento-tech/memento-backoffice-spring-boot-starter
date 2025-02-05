@@ -1,6 +1,10 @@
 package com.memento.tech.backoffice.entity;
 
 import com.memento.tech.backoffice.annotations.BackofficeExclude;
+import com.memento.tech.backoffice.annotations.BackofficeForbidUpdate;
+import com.memento.tech.backoffice.annotations.BackofficeGroup;
+import com.memento.tech.backoffice.annotations.BackofficeOrderPriority;
+import com.memento.tech.backoffice.annotations.BackofficeTitle;
 import com.memento.tech.backoffice.widget.WidgetHandler;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -25,21 +29,34 @@ import java.util.Objects;
 })
 
 @BackofficeExclude
-public class Widget extends BaseEntity {
+@BackofficeGroup(title = "Backoffice")
+public class Widget extends BaseEntity implements BackofficeConfigurationMarker {
 
     @Column(nullable = false, unique = true)
+    @BackofficeTitle("Widget ID")
+    @BackofficeOrderPriority(100)
     private String widgetId;
 
+    @BackofficeTitle("Entity Level")
+    @BackofficeOrderPriority(97)
     private boolean entityLevel;
 
+    @BackofficeTitle("Record Level")
+    @BackofficeOrderPriority(96)
     private boolean recordLevel;
 
+    @BackofficeTitle("Label")
+    @BackofficeOrderPriority(99)
     private String label;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     @SuppressWarnings("rawtypes")
+    @BackofficeForbidUpdate
     private Class<? extends WidgetHandler> widgetHandlerClass;
 
+    @Column(nullable = false, unique = true)
+    @BackofficeTitle("Handler Mapping")
+    @BackofficeOrderPriority(98)
     private String handlerMapping;
 
     @Override

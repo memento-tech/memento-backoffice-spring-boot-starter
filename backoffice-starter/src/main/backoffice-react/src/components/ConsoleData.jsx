@@ -36,7 +36,6 @@ const ConsoleData = () => {
 
   const navigate = useNavigate();
 
-  const [dataOverflowHidden, setDataOverflowHidden] = useState(false);
   const [data, setData] = useState([]);
   const [sortAsc, setSortAsc] = useState(true);
   const [pageSize, setPageSize] = useState(10);
@@ -115,7 +114,6 @@ const ConsoleData = () => {
   };
 
   const getUpdateNewEntityPopup = (recordData) => {
-    setDataOverflowHidden(true);
     openDataPopup(
       selectedEntity.entityName,
       false,
@@ -181,29 +179,28 @@ const ConsoleData = () => {
   };
 
   return (
-    <Data
-      id="console-data"
-      className={dataOverflowHidden ? "overflowHidden" : ""}
-    >
+    <Data>
       <DataNav />
       <SpacerLine />
       {selectedEntity && (
         <>
-          <DataTable>
-            <thead>
-              <tr>
-                <th></th>
-                <th>No</th>
-                {getEntityFields()}
-              </tr>
-            </thead>
-            <tbody>{data && data.length > 0 && getEntityValues()}</tbody>
-          </DataTable>
+          <TableWrapper>
+            <DataTable>
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>No</th>
+                  {getEntityFields()}
+                </tr>
+              </thead>
+              <tbody>{data && data.length > 0 && getEntityValues()}</tbody>
+            </DataTable>
+          </TableWrapper>
           <FooterDiv>
             {selectedEntity.numOfRecords > 0 && (
               <PagingDiv>
                 <RowsPerPageDiv>
-                  Rows per page:
+                  <RowsPerPageLabel>Rows per page:</RowsPerPageLabel>
                   <select
                     onChange={(e) => {
                       let size = e.target.options[e.target.selectedIndex].value;
@@ -247,39 +244,45 @@ const Data = styled.div`
   display: flex;
   flex-direction: column;
   background-color: #f0f0f0;
-
-  &.overflowHidden {
-    overflow: hidden;
-  }
+  max-width: 100%;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
 `;
 
 const SpacerLine = styled.hr`
-  margin: 1rem 5px;
+  margin: 0.5rem 5px;
   border-color: ${(props) => props.theme.colors.primary};
+`;
+
+const TableWrapper = styled.div`
+  flex-grow: 1;
+  overflow-y: auto;
+  overflow-x: auto;
+  margin: 0 5px;
+  background-color: #f0f0f0;
 `;
 
 const DataTable = styled.table`
   border-collapse: collapse;
-  margin: 0 5px 0 5px;
-  font-size: 0.9em;
   font-family: sans-serif;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-  overflow-x: scroll;
-  overflow-y: scroll;
-  background-color: #ffffff;
+  width: 100%;
+  min-width: 800px; /* Ensures table doesn't shrink too much */
+  background-color: #f0f0f0;
 
   & thead {
+    position: sticky;
+    top: 0;
     background-color: ${(props) => props.theme.colors.primary};
     color: #ffffff;
     border: 1px solid ${(props) => props.theme.colors.primary};
-    & th.sort {
-      box-sizing: border-box;
-      text-align: center;
+    z-index: 10;
+
+    & th {
+      font-weight: 500;
+
       cursor: pointer;
-      &:hover {
-        background-color: #ffffff;
-        color: ${(props) => props.theme.colors.primary};
-      }
     }
   }
 
@@ -320,19 +323,27 @@ const DataCount = styled.div`
 const PagingDiv = styled.div`
   display: flex;
   align-items: center;
+  margin-bottom: 3px;
 `;
 
 const RowsPerPageDiv = styled.div`
   display: flex;
 `;
 
+const RowsPerPageLabel = styled.p`
+  padding-top: 2px;
+  margin-right: 3px;
+`;
+
 const PageNumberButton = styled.button`
-  font-size: 1.3rem;
-  width: 30px;
-  height: 30px;
+  font-size: 1rem;
+  width: 25px;
+  height: 25px;
   border-radius: 15px;
   border: 1px solid #676868a2;
-  margin: 10px 3px;
+  margin: 0 3px;
+  padding-top: 3px;
+  color: black;
 
   &.active {
     cursor: unset;

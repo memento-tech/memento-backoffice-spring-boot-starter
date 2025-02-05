@@ -1,6 +1,9 @@
 package com.memento.tech.backoffice.entity;
 
 import com.memento.tech.backoffice.annotations.BackofficeExclude;
+import com.memento.tech.backoffice.annotations.BackofficeGroup;
+import com.memento.tech.backoffice.annotations.BackofficeOrderPriority;
+import com.memento.tech.backoffice.annotations.BackofficeTitle;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -32,13 +35,18 @@ import java.util.stream.Collectors;
         @Index(columnList = "id", unique = true),
 })
 
-@BackofficeExclude
-public class BackofficeUser extends BaseEntity implements UserDetails {
+@BackofficeTitle("Backoffice User")
+@BackofficeGroup(title = "Backoffice")
+public class BackofficeUser extends BaseEntity implements UserDetails, BackofficeConfigurationMarker {
 
     @Column(unique = true, nullable = false)
+    @BackofficeTitle("Username")
+    @BackofficeOrderPriority(100)
     private String username;
 
     @Column(unique = true, nullable = false)
+    @BackofficeTitle("Password")
+    @BackofficeOrderPriority(99)
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE})
@@ -46,8 +54,11 @@ public class BackofficeUser extends BaseEntity implements UserDetails {
             joinColumns = @JoinColumn(name = "backoffice_user_id", nullable = false),
             inverseJoinColumns = @JoinColumn(name = "backoffice_role_id", nullable = false)
     )
+    @BackofficeTitle("Assigned Roles")
+    @BackofficeOrderPriority(98)
     private List<BackofficeRole> assignedRoles;
 
+    @BackofficeTitle("Enabled")
     private boolean enabled;
 
     @Override

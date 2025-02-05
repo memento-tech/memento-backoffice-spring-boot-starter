@@ -10,5 +10,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 public @interface BackofficeGroup {
 
-    String value();
+    String title();
+
+    int order() default 0;
 }

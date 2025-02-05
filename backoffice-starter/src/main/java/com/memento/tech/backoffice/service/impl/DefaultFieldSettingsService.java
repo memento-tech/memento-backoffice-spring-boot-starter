@@ -64,12 +64,12 @@ public class DefaultFieldSettingsService implements FieldSettingsService {
         final var entityDescriptor = ((MappingMetamodel) entityManager.getEntityManagerFactory().getMetamodel())
                 .getEntityDescriptor(entityType.getJavaType());
 
-        var identifierFieldMetadata = populateIdentifierFieldMetadata(new EntityFieldSettings(), entityDescriptor, entityType);
+        var identifierFieldMetadata = populateIdentifierFieldMetadata(entityDescriptor, entityType);
 
         entityDescriptor.getAttributeMappings()
                 .forEach(attributeMapping -> {
                     if (!identifierFieldMetadata.getField().equals(attributeMapping.getPartName())) {
-                        fieldSettings.add(populateFieldSettings(new EntityFieldSettings(), attributeMapping, entityType));
+                        fieldSettings.add(populateFieldSettings(attributeMapping, entityType));
                     }
                 });
 
@@ -91,7 +91,7 @@ public class DefaultFieldSettingsService implements FieldSettingsService {
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
-    private EntityFieldSettings populateIdentifierFieldMetadata(EntityFieldSettings idFieldSettings, EntityPersister entityDescriptor, EntityType<?> entityType) {
+    private EntityFieldSettings populateIdentifierFieldMetadata(EntityPersister entityDescriptor, EntityType<?> entityType) {
         final var entityClassSimpleName = entityType.getJavaType().getSimpleName();
 
         final var fieldMapping = entityDescriptor.getIdentifierMapping();
@@ -107,23 +107,26 @@ public class DefaultFieldSettingsService implements FieldSettingsService {
                     INTERNAL_BACKOFFICE_ERROR);
         }
 
-        idFieldSettings.setFieldId(entityClassSimpleName + "_" + fieldName);
-        idFieldSettings.setField(fieldName);
-        idFieldSettings.setUniqueField(true);
-        idFieldSettings.setRequired(false);
-        idFieldSettings.setOptional(false);
-        idFieldSettings.setChangeOptionalAllowed(false);
-        idFieldSettings.setUpdatable(false);
-        idFieldSettings.setChangeUpdatableAllowed(false);
-        idFieldSettings.setBasic(true);
-        idFieldSettings.setFieldClass(fieldClass);
+        final EntityFieldSettings idFieldSettings = EntityFieldSettings.builder()
+                .fieldId(entityClassSimpleName + "_" + fieldName)
+                .entityName(fieldClass.getSimpleName())
+                .field(fieldName)
+                .uniqueField(true)
+                .required(false)
+                .optional(false)
+                .changeOptionalAllowed(false)
+                .updatable(false)
+                .changeUpdatableAllowed(false)
+                .basic(true)
+                .fieldClass(fieldClass)
+                .build();
 
         fieldAnnotationHandler.handleFieldAnnotation(idFieldSettings, field);
 
         return idFieldSettings;
     }
 
-    private EntityFieldSettings populateFieldSettings(EntityFieldSettings fieldSettings, AttributeMapping attributeMapping, EntityType<?> entityType) {
+    private EntityFieldSettings populateFieldSettings(AttributeMapping attributeMapping, EntityType<?> entityType) {
         final var entityClassSimpleName = entityType.getJavaType().getSimpleName();
 
         final var fieldName = attributeMapping.getPartName();
@@ -143,28 +146,21 @@ public class DefaultFieldSettingsService implements FieldSettingsService {
         final var isPasswordField = Objects.nonNull(field.getAnnotation(BackofficePasswordFlag.class));
         final var isEnumeratedField = Objects.nonNull(field.getAnnotation(Enumerated.class));
 
-        fieldSettings.setEntityName(fieldClass.getSimpleName());
-        fieldSettings.setFieldId(entityClassSimpleName + "_" + fieldName);
-        fieldSettings.setField(fieldName);
-
-        fieldSettings.setRequired(isRequired);
-        fieldSettings.setPassword(isPasswordField);
-        fieldSettings.setOptional(fieldMetadata.isNullable());
-        fieldSettings.setChangeOptionalAllowed(fieldMetadata.isNullable());
-
-        fieldSettings.setUpdatable(fieldMetadata.isUpdatable());
-        fieldSettings.setChangeUpdatableAllowed(fieldMetadata.isUpdatable());
-
-        if (isEnumeratedField) {
-            fieldSettings.setBasic(false);
-        } else {
-            fieldSettings.setBasic(attributeMapping instanceof BasicAttributeMapping);
-        }
-
-        fieldSettings.setFieldClass(fieldClass);
-        fieldSettings.setMultivalue(false);
-
-        fieldSettings.setEnumerated(isEnumeratedField);
+        EntityFieldSettings fieldSettings = EntityFieldSettings.builder()
+                .entityName(fieldClass.getSimpleName())
+                .fieldId(entityClassSimpleName + "_" + fieldName)
+                .field(fieldName)
+                .required(isRequired)
+                .isPassword(isPasswordField)
+                .optional(fieldMetadata.isNullable())
+                .changeOptionalAllowed(fieldMetadata.isNullable())
+                .updatable(fieldMetadata.isUpdatable())
+                .changeUpdatableAllowed(fieldMetadata.isUpdatable())
+                .fieldClass(fieldClass)
+                .multivalue(false)
+                .isEnumerated(isEnumeratedField)
+                .basic(!isEnumeratedField && attributeMapping instanceof BasicAttributeMapping)
+                .build();
 
         fieldAnnotationHandler.handleFieldAnnotation(fieldSettings, field);
 

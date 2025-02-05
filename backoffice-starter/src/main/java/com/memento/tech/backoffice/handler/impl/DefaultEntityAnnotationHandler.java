@@ -13,7 +13,6 @@ import com.memento.tech.backoffice.entity.Widget;
 import com.memento.tech.backoffice.handler.EntityAnnotationHandler;
 import com.memento.tech.backoffice.repository.WidgetRepository;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -51,11 +50,9 @@ public class DefaultEntityAnnotationHandler implements EntityAnnotationHandler {
     }
 
     private void handleEntityOrder(EntitySettings entitySettings, Class<?> entityClass) {
-        var priority = Optional.ofNullable(entityClass.getAnnotation(BackofficeOrderPriority.class))
+        Optional.ofNullable(entityClass.getAnnotation(BackofficeOrderPriority.class))
                 .map(BackofficeOrderPriority::value)
-                .orElse(0);
-
-        entitySettings.setEntityOrder(priority);
+                .ifPresent(entitySettings::setEntityOrder);
     }
 
     private void handleEntityTitle(EntitySettings entitySettings, Class<?> entityClass) {
@@ -67,11 +64,11 @@ public class DefaultEntityAnnotationHandler implements EntityAnnotationHandler {
     }
 
     private void handleEntityGroup(EntitySettings entitySettings, Class<?> entityClass) {
-        var group = Optional.ofNullable(entityClass.getAnnotation(BackofficeGroup.class))
-                .map(BackofficeGroup::value)
-                .orElse(StringUtils.EMPTY);
-
-        entitySettings.setEntityGroup(group);
+        Optional.ofNullable(entityClass.getAnnotation(BackofficeGroup.class))
+                .ifPresent(groupAnnotation -> {
+                    entitySettings.setEntityGroup(groupAnnotation.title());
+                    entitySettings.setGroupOrder(groupAnnotation.order());
+                });
     }
 
     private void handleFieldForShowInList(EntitySettings entitySettings, Class<?> entityClass) {

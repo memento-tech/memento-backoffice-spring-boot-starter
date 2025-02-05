@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { OutlinedButton } from "./OutlinedButton";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchEntityMetadatas,
@@ -7,7 +6,8 @@ import {
 } from "../redux/reducers/entityMetadataSlice";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import RefreshIcon from "./icons/RefreshIcon";
+import BackofficeGroupButton from "./BackofficeGroupButton";
+import BackofficeNavButton from "./BackofficeNavButton";
 
 const ConsoleNav = () => {
   const dispatch = useDispatch();
@@ -19,46 +19,51 @@ const ConsoleNav = () => {
     setEntityName(searchParams.get("entityName"));
   }, [searchParams]);
 
+  const entityMetadataState = useSelector(
+    (state) => state.entityMetadatasState
+  );
+
   useEffect(() => {
     if (entityName) {
       dispatch(setSelectedEntityMetadata({ entityName: entityName }));
     }
-  }, [entityName, dispatch]);
-
-  const entityMetadataState = useSelector(
-    (state) => state.entityMetadatasState
-  );
+  }, [entityName, entityMetadataState.entityMetadatas, dispatch]);
 
   const refreshMetadata = () => {
     dispatch(fetchEntityMetadatas(true));
   };
 
   const handleButtonClick = (entityName) => {
-    navigate(`/backoffice?entityName=${entityName}`);
+    navigate(`/backoffice/console?entityName=${entityName}`);
     window.scrollTo(0, 0);
   };
 
   return (
     <Nav>
-      <Heading>
-        Admin console
-        <NavRefreshButton title="Click to refresh entity metadata.">
-          <RefreshIcon onClick={() => refreshMetadata()} height={18} />
-        </NavRefreshButton>
-      </Heading>
+      <Heading>Admin console</Heading>
       <StyledHr />
       <EntityList>
-        {entityMetadataState.entityMetadatas
-          .filter((entity) => !entity.exclude)
-          .map((entity, index) => (
-            <BackofficeNavButton
-              key={index}
-              onClick={() => handleButtonClick(entity.entityName)}
-              title={entity.entityName}
-            >
-              {entity.entityTitle}
-            </BackofficeNavButton>
-          ))}
+        {entityMetadataState.metadataWrappers.map((wrapper, index) => {
+          if (wrapper.group) {
+            return (
+              <BackofficeGroupButton
+                index={index}
+                group={wrapper}
+                handleEntityButtonClick={handleButtonClick}
+              />
+            );
+          } else {
+            return (
+              <BackofficeNavButton
+                key={index}
+                onClick={() => handleButtonClick(wrapper.entityName)}
+                title={wrapper.entityName}
+              >
+                {wrapper.entityTitle}
+              </BackofficeNavButton>
+            );
+          }
+        })}
       </EntityList>
       {entityMetadataState.entityMetadatas?.length === 0 &&
         "Please refresh metadata"}
@@ -98,27 +103,22 @@ const StyledHr = styled.hr`
 `;
 
 const EntityList = styled.ul`
-  padding: 20px 20px;
+  padding: 0 1rem;
   margin: 0;
-`;
+  width: 80%;
+  max-width: 80%;
+  margin-bottom: 1rem;
 
-const NavRefreshButton = styled.button`
-  padding: 0;
-  margin: 0;
-  margin-left: 0.5rem;
-`;
-
-const BackofficeNavButton = styled(OutlinedButton)`
-  width: 100%;
-  max-width: 240px;
-  overflow: hidden;
-  padding: 5px;
-  margin-top: 5px;
-  border-color: black;
-  color: black;
+  .active {
+    color: white;
+    background: ${(props) => props.theme.colors.primary};
+    border-color: white;
+    transition: all 0.1s linear;
+  }
 `;
 
 const RefreshButton = styled(BackofficeNavButton)`
+  margin-top: 1rem;
   width: 80%;
   margin: auto auto 0 auto;
 `;

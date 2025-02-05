@@ -1,2 +1,2 @@
 com.memento.tech.backoffice.configuration.BackofficeAutoconfiguration
-com.memento.tech.backoffice.configuration.BackofficeSecurityAutoconfiguration
+com.memento.tech.backoffice.auth.BackofficeSecurityAutoconfiguration

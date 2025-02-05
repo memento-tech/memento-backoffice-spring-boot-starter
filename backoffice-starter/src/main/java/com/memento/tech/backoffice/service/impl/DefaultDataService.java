@@ -180,13 +180,9 @@ public class DefaultDataService implements DataService {
             var simpleName = idValue.equals(StringUtils.EMPTY) ? "" : entityName + "(" + idValue + ")";
 
             if (value instanceof Translation translation) {
-                var defaultLangIsoCode = languageService.getDefaultLanguage()
-                        .map(Language::getLangIsoCode)
-                        .orElse(StringUtils.EMPTY);
-
                 var suffixSimpleName = CollectionUtils.emptyIfNull(translation.getTranslationWrappers())
                         .stream()
-                        .filter(wrapper -> wrapper.getLanguage().getLangIsoCode().equals(defaultLangIsoCode))
+                        .filter(wrapper -> wrapper.getLanguage().getLangIsoCode().equals(languageService.getDefaultLanguageIsoCode()))
                         .findFirst()
                         .map(_translation -> "('" + _translation.getTranslation() + "')")
                         .orElse(StringUtils.EMPTY);
@@ -207,7 +203,9 @@ public class DefaultDataService implements DataService {
     }
 
     private String basicFieldValueToString(Object value) {
-        if (value instanceof String stringValue) {
+        if (value instanceof Class<?> clazz) {
+            return clazz.getName();
+        } else if (value instanceof String stringValue) {
             return stringValue;
         } else if (value instanceof LocalDateTime dateTime) {
             return dateTime.toString();

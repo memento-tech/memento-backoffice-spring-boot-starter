@@ -3,6 +3,7 @@ package com.memento.tech.backoffice.entity;
 import com.memento.tech.backoffice.annotations.BackofficeFieldForShowInList;
 import com.memento.tech.backoffice.annotations.BackofficeForbidUpdate;
 import com.memento.tech.backoffice.annotations.BackofficeOrderPriority;
+import com.memento.tech.backoffice.annotations.BackofficeTitle;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Index;
@@ -27,35 +28,46 @@ import java.util.Objects;
 })
 
 @BackofficeFieldForShowInList("title")
-public class Media extends BaseEntity {
+public class Media extends BaseEntity implements BackofficeConfigurationMarker {
 
     @Column(unique = true, nullable = false)
     @BackofficeOrderPriority(100)
     @BackofficeForbidUpdate
+    @BackofficeTitle("Name")
     private String name;
 
     @Column
     @BackofficeForbidUpdate
+    @BackofficeOrderPriority(98)
+    @BackofficeTitle("Original Name")
     private String originalFileName;
 
     @Column
     @BackofficeOrderPriority(99)
+    @BackofficeTitle("Description")
     private String description;
 
     @Column(nullable = false)
     @BackofficeForbidUpdate
+    @BackofficeOrderPriority(96)
+    @BackofficeTitle("Extension")
     private String mediaExtension;
 
     @Column
     @BackofficeForbidUpdate
+    @BackofficeOrderPriority(95)
+    @BackofficeTitle("Size")
     private long mediaSize;
 
     @Column(nullable = false)
     @BackofficeForbidUpdate
+    @BackofficeTitle("URL")
     private String mediaUrl;
 
     @Column
     @BackofficeForbidUpdate
+    @BackofficeOrderPriority(97)
+    @BackofficeTitle("Content Type")
     private String contentType;
 
     @Override

@@ -26,12 +26,14 @@ public class BaseEntity {
     @BackofficeOrderPriority(-1001)
     @BackofficeTitle("ID")
     @OrderBy
+    @BackofficeForbidUpdate
     private String id;
 
     @Column(updatable = false)
     @CreationTimestamp
     @BackofficeOrderPriority(-1000)
     @BackofficeTitle("Created at")
+    @BackofficeForbidUpdate
     private LocalDateTime createdAt;
 
     @UpdateTimestamp

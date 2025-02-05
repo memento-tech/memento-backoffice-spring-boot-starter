@@ -2,6 +2,7 @@ package com.memento.tech.backoffice.entity;
 
 import com.memento.tech.backoffice.annotations.BackofficeFieldForShowInList;
 import com.memento.tech.backoffice.annotations.BackofficeOrderPriority;
+import com.memento.tech.backoffice.annotations.BackofficeTitle;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Index;
@@ -26,11 +27,14 @@ import java.util.Objects;
 
 @BackofficeFieldForShowInList("title")
 @BackofficeOrderPriority(95)
-public class Language extends BaseEntity {
+public class Language extends BaseEntity implements BackofficeConfigurationMarker {
 
     @Column(unique = true, nullable = false)
+    @BackofficeTitle("ISO Code")
+    @BackofficeOrderPriority(100)
     private String langIsoCode;
 
+    @BackofficeTitle("Title")
     private String title;
 
     @Override

@@ -11,10 +11,6 @@ public interface TranslationService {
 
     String getTranslation(final String translationCode, Object... params);
 
-    String getTranslation(final String translationCode, final String defaultLangIsoCode);
-
-    String getTranslation(final String translationCode, final String defaultLangIsoCode, Object... params);
-
     String getTranslationForLangIsoCode(final String translationCode, final String langIsoCode);
 
     Translation getTranslationData(final String translationCode);

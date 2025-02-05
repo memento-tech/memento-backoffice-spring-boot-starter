@@ -26,6 +26,7 @@ public class EntityMetadataPopuplator {
 
         var fieldsMetadata = entitySettings.getFieldSettings()
                 .stream()
+                .filter(fieldSettings -> !fieldSettings.isExcludeField())
                 .map(entityFieldMetadataPopulator::populateFieldMetadata)
                 .toList();
 
@@ -38,15 +39,15 @@ public class EntityMetadataPopuplator {
                 .builder()
                 .entityName(entitySettings.getEntityName())
                 .entityTitle(entitySettings.getTitle())
-                .entityGroup(entitySettings.getEntityGroup())
                 .fieldForShowInList(entitySettings.getFieldForShowInList())
                 .entityFields(fieldsMetadata)
-                .creationFields(entitySettings.getCreationSettings())
+                .creationSettings(entitySettings.getCreationSettings())
                 .widgets(widgetsMetadata)
                 .numOfRecords(numberOfRecords)
                 .exclude(entitySettings.isExcludeEntity())
                 .translation(entitySettings.isTranslation())
                 .media(entitySettings.isMedia())
+                .order(entitySettings.getEntityOrder())
                 .build();
     }
 }
