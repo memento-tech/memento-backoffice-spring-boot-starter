@@ -1,5 +1,5 @@
 
-## Table of Content
+### Table of Content
 
 - [1. Introduction](#introduction)
   - [1.1 Key Objectives](#key-objectives)
@@ -11,73 +11,85 @@
   - [2.2 Quick Start Guide](#quick-start-guide)
   - [2.3 UI Guide](#ui-guide)
 - [3. Technical Documentation](#technical-documentation)
-  - [3.1 Authentication](#authentication)
-  - [3.2 Translations Management Tool](#translations-management-tool)
-  - [3.3 Media Management Tool](#media-management-tool)
-  - [3.4 Functional Widgets](#functional-widgets)
-  - [3.5 UI Widgets](#ui-widgets)
-  - [3.6 Cron Job Management Tool](#cron-job-management-tool)
-  - [3.7 Live Console](#live-console)
-- [4. API Documentation](#api-documentation)
-- [5. Contribution Guide](#contribution-guide)
-- [6. License](#license)
+  - [3.1 Annotations Overview](#annotations-overview)
+  - [3.2 Authentication](#authentication)
+  - [3.3 Translations Management Tool](#translations-management-tool)
+  - [3.4 Media Management Tool](#media-management-tool)
+  - [3.5 Functional Widgets](#functional-widgets)
+  - [3.6 UI Widgets](#ui-widgets)
+  - [3.7 Cron Job Management Tool](#cron-job-management-tool)
+  - [3.8 Live Console](#live-console)
+- [4. Contribution Guide](#contribution-guide)
+- [5. License](#license)
 
 
 ## **Introduction**
  **Overview of the project**
  
-The Backoffice Spring Boot Starter is built to make backend management simple and efficient. It serves as a **developer-friendly console** that eliminates the need to work directly with the database using tools like SQL or database management software and enables employees outside of development zone to work and monitor application. By focusing on streamlining workflows, it empowers teams to manage changes and resolve issues more effectively.
+The Backoffice Spring Boot Starter is designed to simplify backend management, providing a developer-friendly interface that eliminates the need for direct database interaction through SQL queries or database management tools. It also enables non-developers (such as business users and administrators) to monitor and manage the application effectively.
+
+By streamlining workflows, the Backoffice Starter enhances productivity, allowing teams to implement changes, track database modifications, and resolve issues more efficiently.
+
 ### **Key Objectives**
 1.  **Simplify Backend Workflows**
-    -   Perform common backend tasks without dealing directly with the database.
-    -   Quickly identify and track changes made by the main application to the database.
+    -   Perform essential backend tasks without direct database access.
+    -   Easily track and manage changes made by the main application.
 2.  **Developer and QA Efficiency**
-    -   Provide developers and QA engineers with tools to make their jobs easier and faster.
-    -   Centralize backend operations to reduce dependency on external tools.
+    -   Provide centralized tools for developers and QA engineers to speed up their workflows.
+    -   Reduce reliance on external database management tools.
 3.  **Future Growth**
-    -   Expand to include features for **business users**, enabling them to monitor the app, analyze data, and collaborate with development teams.
-    -   Remove dependency on Hibernate and implement abstract JPA solution in order to accommodate other JPA implementations like Spring Data JPA, MyBatis, EclipseLink etc.
+    -   Expand functionality to include features for business users, enabling them to analyze data and collaborate with development teams.
+    -   Decouple from Hibernate and implement an abstract JPA solution to support multiple JPA implementations like Spring Data JPA, MyBatis, EclipseLink, and others.
 ### **Current Features**
 -   **Plug-and-Play Integration**
-    -   Get started quickly with minimal setup required.
--   **Translation Support**
-    -   Manage and update application translations with ease.
+    -   Get started quickly with minimal setup and configuration.
+-   **Translation Management**
+    -   Easily manage and update translations across the application.
 -   **Media Management**
-    -   Upload, organize, and manage media files like images and documents.
+    -   Upload, organize, and manage media files (e.g., images, documents).
 -   **Cron Job Support** (coming soon)
-	-  Create and run simple and complex cron jobs and monitor their health
+	-  Create, schedule, and monitor both simple and complex cron jobs.
 
-The Backoffice Spring Boot Starter bridges the gap between development, testing, and future business needs, making it a powerful and flexible solution for managing backend operations.
-### **Intended Audience**
-The Backoffice Spring Boot Starter is designed for **small companies**, **startups**, and **mid-sized companies** that want to accelerate development and streamline backend operations.
--   **For Startups**:
-    -   Perfect for new projects looking to get up and running quickly.
-    -   All you need is **Spring Boot** and **Hibernate**—the starter takes care of the rest.
--   **For Existing Projects**:
-    -   Easily adaptable for mid-sized or established projects.
-    -   Some adjustments may be required to integrate the starter seamlessly, but these will be addressed in future sections.
- 
-Whether you're launching a new project or enhancing an existing one, the Backoffice Spring Boot Starter provides a flexible, easy-to-use solution to boost your development process.
-### **Prerequisites**
-Before getting started with the Backoffice Spring Boot Starter, ensure you have the following knowledge and tools:
-#### **Required Knowledge**
--   **Java**: A solid understanding of Java is essential for working with the backend.
--   **Spring Boot**: Even though familiarity with Spring Boot is mandatory, it's likely already part of your toolkit if you're building a Spring Boot application.
--   **Hibernate**: Understanding Hibernate is necessary for working with the starter's database integration.
--   **ReactJS**: The frontend uses React, and you'll need knowledge of it to extend the current implementation or customize features using your code.
-#### **Tools Needed**
--   **JDK**: Java Development Kit, compatible with your project's Spring Boot version.
--   **Maven or Gradle**: For dependency management and building the project.
--   **Node.js**: Required for the React frontend development and build process.
+The **Backoffice Spring Boot Starter** bridges the gap between development, testing, and business operations, providing a powerful and flexible solution for managing backend processes.  
 
-With these prerequisites in place, you're ready to integrate and start using the starter.
+### **Intended Audience**  
+The Backoffice Spring Boot Starter is designed for **small businesses**, **startups**, and **mid-sized companies** looking to accelerate development and streamline backend operations.  
+
+- **For Startups**:  
+  - Ideal for new projects that need a quick and efficient setup.  
+  - Requires only **Spring Boot** and **Hibernate**—the starter handles the rest.  
+
+- **For Existing Projects**:  
+  - Easily adaptable for mid-sized or established applications.  
+  - Some adjustments may be needed for seamless integration, which will be covered in later sections.  
+
+Whether you're launching a new project or improving an existing one, the Backoffice Spring Boot Starter offers a **flexible and developer-friendly** solution to enhance backend workflows.  
+
+### **Prerequisites**  
+Before getting started, ensure you have the following knowledge and tools.  
+
+#### **Required Knowledge**  
+- **Java** – A strong understanding of Java is essential for backend development.  
+- **Spring Boot** – While prior experience with Spring Boot is required, it's a core technology for most backend applications.  
+- **Hibernate** – Since the starter integrates with Hibernate, familiarity with it is necessary.  
+- **ReactJS** – The frontend is built with React, so basic knowledge is required for customization and feature extensions.  
+
+#### **Tools Needed**  
+- **JDK** – A Java Development Kit compatible with your project's Spring Boot version.  
+- **Maven or Gradle** – For dependency management and project builds.  
+- **Node.js** – Required for React frontend development and build processes.  
+
+With these prerequisites in place, you're ready to integrate and start using the Backoffice Spring Boot Starter. 🚀  
 
 ## **Getting Started**
 
 ### **Installation**
-Backoffice starter is meant to be easily used and installed in few steps. 
+The Backoffice Spring Boot Starter is designed for easy installation and setup in just a few steps.  
 
 **Step 1: Adding dependency to memento-backoffice-spring-boot-starter**
+
+Add the following dependency to your project based on your build system:  
+
 ```
 pom.xml
 
@@ -94,128 +106,540 @@ dependencies { implementation "com.memento.tech:memento-backoffice-spring-boot-s
 ```
 **Step 2: Configuration of backoffice** 
 
-In order for backoffice to work there are few configuration properties that need to be added to the application.yaml/application.properties file:
+To enable the Backoffice module, add the following configuration properties to your application.yaml or application.properties file.
+
  - **memento.tech.backoffice.enabled**
-   - this property will allow Spring Boot to load all required beans into context. With this property set to **true** backoffice will be available to the end user with basic functionalities.
+   - Enables Backoffice and loads all required beans into the Spring context. Set to true to activate Backoffice with basic functionalities.
  - **memento.tech.backoffice.media.enabled**
-   - this property will enable backoffice to manage media. 
+   - Enables media management within Backoffice.
  - **memento.tech.backoffice.media.internal.storage.enabled**
-   - this property will enable default implementation of media management. If there is no other implementation of media management provided by end user, this property is required alongside previous property. More on media management topic later.
+   - Enables the default implementation for media storage. If no custom media management is provided by the user, this property must be set to true.
  - **memento.tech.backoffice.media.file.import.upload.directory**
-   - property will be used by media management tool to determin where media should be stored. This property is required when previous property is set to **true**.
+   - Defines the storage location for uploaded media files. Required when internal storage is enabled.
  - **memento.tech.backoffice.media.mapping**
-   - this property is used by media management tool. All medias provided (if allowed) will be visible via mapping http://appliication.domain/mediaMappingProperty/mediaId.
+   - Defines the URL mapping for accessing uploaded media. Example format: http://application.domain/{mediaMappingProperty}/{mediaId}.
  - **memento.tech.backoffice.translation.enabled**
-   - this property is used for enabling translation management tool provided by backoffice starter.
+   - Enables the translation management tool.
  - **memento.tech.backoffice.translation.useDefaultIfBlank**
-   - if this property is set to true and no translations were found for specific language, default language translation will be provided. If default language translation was not found also, translation code will be returned as an indication that there is no translation provided for both searched and default language. If this property is set to false, only default language part will be omitted.
+   - If set to true, and a translation is missing for a specific language, the default language translation will be used. If no default translation is found, the translation key itself will be returned. If set to false, only the requested translation will be checked.
  - **memento.tech.backoffice.translation.default.language**
-   - property used for setting default language. **Note** that languages provided must be in ISO standard.
+   - Sets the default language for translations (must follow ISO language standards).
  - **memento.tech.backoffice.auth.token.secret**
-   - property used for setting token secret. Default value is provided but it is recommended that specific one is provided.
+   - Defines the authentication token secret. A default value is provided, but it is recommended to set a custom one.
  - **memento.tech.backoffice.auth.cookie.name**
-   - property used for setting http-only cookie name. Default cookie name is "backofficeAccessCookie". More on this in section Backoffice Auth Configuration.
+   - Sets the HTTP-only cookie name. The default is "backofficeAccessCookie". More details can be found in the Backoffice Auth Configuration section.
  - **memento.tech.backoffice.auth.cookie.expiry**
-   - property used for setting cookie expiry time in milliseconds. Default value is 0 milliseconds.
+   - Defines the cookie expiration time in milliseconds. The default value is 0 milliseconds.
  - **memento.tech.backoffice.development.mode**
-   - property used for creating backoffice development used. If set to true (default value is true). User will be created with username "test" and password "password". It is recommended to set this value to false on production environment.
+   - Enables development mode. If set to true (default), a test user is created with username: "test" and password: "password". It is recommended to disable this (false) in production environments.
+
 ### **Quick Start Guide**
 https://github.com/memento-tech/memento-backoffice-spring-boot-starter/tree/main
 
-Source code of Backoffice Spring Boot Starter can be found on link above. Coupled with source code there is a Quick Start Project called "demo-project". Developer can pull that demo-project with source code of the Backoffice Starter and can run it as any application. Bellow are the steps to run demo-project.
+The source code of the **Backoffice Spring Boot Starter** is available at the provided link. Along with the source code, there is a **Quick Start Project** called `"demo-project"`. Developers can clone the `demo-project` along with the Backoffice Starter source code and run it as a standard Spring Boot application.  
 
 - **Pull source code using GitHub**
    - ``git clone https://github.com/memento-tech/memento-backoffice-spring-boot-starter.git``
 - **IDE Import**
    - Using your preferred IDE import project using maven.
 - **Maven Build**
-   - Since this way backoffice starter is not prebuilt, run maven command: ``mvn clean install -pl backoffice-starter``
+   - Since this way backoffice starter is not prebuilt, run maven command: ``mvn clean install``
 - **Run**
    - Finally, run demo-application through your preferred IDE. Backoffice UI will be available on address http://localhost:8080/backoffice/login
 
+The demo-project provides a fully functional example, allowing developers to explore the features and configurations of the Backoffice Spring Boot Starter before integrating it into their own applications.
+
 ### **UI Guide**
-In this section, pages will be listed and parts of the UI will be explained. UI is built with UX in mind so most of the components are pretty much self explanatory.
+This section provides an overview of the Backoffice UI, explaining its pages and key components. The UI is designed with **UX in mind**, ensuring that most elements are intuitive and self-explanatory.
 
-**Login Page** 
-Login page is a simple page that contains only login form. For more information about authentication process of Backoffice Starter go to [Authentication section](#authentication)
+### **Login Page** 
 
-<img width="1469" alt="backoffice-starter-login-page" src="https://github.com/user-attachments/assets/b3e0738b-3635-496f-af47-983300aa1798" />
+The **Login Page** is a minimalistic interface containing only the login form. It serves as the entry point for accessing the Backoffice.
 
-**Console Page** 
+For more details on the authentication process and login mechanics, refer to the [Authentication section](#authentication).
 
-Console page is the main and currently only page of Backoffice Starter. Page is divided into two sections:
- - console navigation
- - console data management
+<p align="center">
+	<img width="1469" alt="backoffice-starter-login-page" src="https://github.com/user-attachments/assets/b3e0738b-3635-496f-af47-983300aa1798" />
+</p>
 
-<img width="1469" alt="backoffice-console-start" src="https://github.com/user-attachments/assets/0571da46-c80d-4954-904e-54a149562466" />
+### **Console Page** 
 
-**Console Navigation**
+The **Console Page** is the central and currently the only page of the Backoffice Starter. It is structured into two main sections: 
+ - **Console Navigation** – Provides access to different management tools and features.  
+ - **Console Data Management** – Displays and allows interaction with backend data.  
 
-When first starting Backoffice Starter, console navigation will be empty with message displaying "Please refresh metadata" (image 1, left side). Clicking on the button "**Refresh metadata**" software will go through all entities provided and collect all information needed for data management. After few seconds console navigation will be populated with entities and groups of entities(image 1, right side). 
+<p align="center">
+	<img width="1469" alt="backoffice-console-start" src="https://github.com/user-attachments/assets/0571da46-c80d-4954-904e-54a149562466" />
+</p>
 
-Button "**Refresh metadata**" should be used only when change is provided to the entities and their structure. Regular refresh of the page should still be done via F5 button or button provided by the browser.
+#### **Console Navigation**
 
-When entity button is clicked (button without chevron), data management part will be changed according to the entity chosen. When group button is clicked (button with chevron on the right) list of entities of selected group will be shown bellow group button.
+When first launching the Backoffice Starter, the **Console Navigation** panel will be empty, displaying a message:  
+*"Please refresh metadata"* (see **Image 1, left side**).  
 
-<div style="display=flex">
+Clicking the **"Refresh Metadata"** button will trigger the software to scan all available entities and gather the necessary information for data management. After a few seconds, the **Console Navigation** will populate with entities and groups of entities (**Image 1, right side**).  
+
+#### **Usage Guidelines:**  
+- The **"Refresh Metadata"** button should only be used when changes are made to entities or their structure.  
+- Regular page refreshes should be done using **F5** or the browser’s built-in refresh button.  
+
+#### **Interacting with Console Navigation:**  
+- **Entity Buttons (No Chevron):** Clicking an entity button will update the **Console Data Management** section to reflect data from the selected entity.  
+- **Group Buttons (With Chevron):** Clicking a group button will expand the group and reveal the list of entities under that category.  
+
+<p align="center">
 	<img width="248" alt="navigation-before-refresh" src="https://github.com/user-attachments/assets/8f7dc49c-6ec2-4428-8e01-4fbd4ff4d3b3" />
 	<img width="248" alt="navigation-after-refresh" src="https://github.com/user-attachments/assets/4f8300bc-9f76-4815-8be6-29de729fe315" />
-</div>
+</p>
 
-**Console Data Management**
+### **Console Data Management**  
 
-Console Data Management section is divided into two sections:
- - toolbar (top of the page)
- - data management
+The **Console Data Management** section is structured into two main parts:  
+- **Toolbar (Top of the Page)**  
+- **Data Management Panel**  
 
-When first starting Backoffice Starter, data management part will be empty and toolbar will contain only "Logout" button.
+#### **Initial State**  
+When first launching the Backoffice Starter, the **Data Management** panel will be empty, and the **Toolbar** will contain only a **"Logout"** button.  
 
-<img width="1220" alt="data-management-empty" src="https://github.com/user-attachments/assets/08ccf27d-f4c9-435d-b7cd-4ba001dacc1f" />
+Once an entity is selected from the **Console Navigation**, the **Data Management** section will populate with tools and data relevant to that entity.  
 
-When metadata is collected and navigation has all entities, user can click on any entity in order to trigger data management section to reload and collect all required information for selected entity. Based on entity configuration, toolbar can contain creation button or other (user implemented) widgets.
+<p align="center">
+	<img width="1220" alt="data-management-empty" src="https://github.com/user-attachments/assets/08ccf27d-f4c9-435d-b7cd-4ba001dacc1f" />
+</p>
 
-Once user selects entity, records will be displayed on data management section if any. User can select number of records to show in lower toolbar. Lower toolbar contains selected entity records information and show options. On top are show options and user can select number of records to display per page, options are 10, 20, 50 and "all". On bottom information about total number of records found is displayed.
+### **Entity Selection & Data Management Panel**  
 
-Records are displayed in main part of the data management section inside table. Table contains displayable columns configured via backoffice annotations. More information about available annotations can be found [here](#backoffice-annotations). Table also contains two additional columns, delete column and no column (simple order 1 to n).
+Once metadata is collected and all entities appear in the navigation menu, users can click on any entity to trigger the **Data Management** section to reload and fetch the necessary information for the selected entity.  
 
-To delete record, click on thrash icon on the left. Note that this action is not reversible.
-To update record, click on any part of the record row, once clicked entity popup will be shown. Entity popup contains all information both updatable and non updatable.
+#### **Toolbar Functionality**  
+The **Toolbar** will adapt based on the selected entity's configuration:  
+- It may contain a **"Create"** button if entity creation is enabled.  
+- Other widgets implemented by the user may also appear here.  
 
-<img width="1470" alt="data-management-populated" src="https://github.com/user-attachments/assets/fee2bbb9-abfb-420a-b48e-0305845d1d5b" />
+#### **Displaying Records**  
+Once an entity is selected, its records (if available) will be displayed in the **Data Management** panel.  
 
-**Entity Creation Popup** 
+##### **Lower Toolbar**  
+- The **lower toolbar** provides options for adjusting how many records are displayed per page.  
+- Users can select between **10, 20, 50, or "All"** records per page.  
+- The total number of available records is displayed at the bottom of the section.  
 
-*TODO*
+##### **Table Layout**  
+Records are presented in a **table** within the **Data Management** section.  
+- The table includes **displayable columns** configured via **Backoffice annotations** (more details [here](#backoffice-annotations)).  
+- Two additional columns are always present:  
+  - **Delete Column** (Trash Icon)  
+  - **No Column** (Row Number, ordered from 1 to n)  
 
-**Media Creation Popup** 
+#### **Managing Records**  
+- **Deleting Records**  
+  - Click the **trash icon** in the **Delete Column** to remove a record.  
+  - ⚠️ **This action is irreversible.**  
 
-*TODO*
+- **Updating Records**  
+  - Click on any row in the table to open the **Entity Popup**.  
+  - The **Entity Popup** displays all details of the record, including both **editable and non-editable fields**.  
 
-**Translation Creation Popup** 
 
-*TODO*
+<p align="center">
+	<img width="1470" alt="data-management-populated" src="https://github.com/user-attachments/assets/fee2bbb9-abfb-420a-b48e-0305845d1d5b" />
+</p>
 
-## **Technical Documentation**
-### **Authentication**
-*coming soon*
-### **Translations Management Tool**
-*coming soon*
-### **Media Management Tool**
-*coming soon*
-### **Functional Widgets**
-*coming soon*
-### **UI Widgets**
-*coming soon*
-### **Cron Job Management Tool**
-*coming soon*
-### **Live console**
-*coming soon*
+**Entity Creation Popup**
 
-## **API Documentation**
+### **Entity Creation Popup**  
 
--   Comprehensive list of endpoints (e.g., `/api/auth/login`, `/api/backoffice/**`).
--   Request and response formats.
--   Authentication and authorization requirements for each endpoint.
+The **Entity Creation Popup** is used for adding new entities.  
+
+#### **General Entity Creation**  
+- All entities (except **Media** and **Translation**) use the **default** entity creation popup.  
+- If an entity has **creation enabled**, it can be added through this popup.  
+- The popup **does not always include all entity fields**, as users can customize which fields appear in the creation form to meet specific requirements.  
+
+<p align="center">
+	<img width="1063" alt="EntityCreationPopup" src="https://github.com/user-attachments/assets/53007ec9-bd69-4099-9daf-a69fd1d4c620" />
+</p>
+
+#### **Media Creation Popup**  
+- The **Media Creation Popup** is specifically designed for adding media files.  
+- It contains **two fields**:  
+  1. **Description** – A user-friendly text to describe the media.  
+  2. **Media File Import** – A field to upload the media file.  
+- The **media name** is automatically generated using the formula:  
+  **`randomUUID-originalFileName`**  
+- The generated name is primarily for internal reference, as **all media operations** are handled through **media objects** rather than filenames.
+
+
+<p align="center">
+	<img width="486" alt="MediaCreationPopup" src="https://github.com/user-attachments/assets/83110b88-0989-4814-bc03-d21181afb537" />
+</p>
+
+#### **Translation Creation Popup**  
+- The **Translation Creation Popup** is designed for managing translations.  
+- It includes **at least two fields**:  
+  1. **Translation Code**  
+  2. **Translation Text**  
+- The number of fields varies **based on the number of languages** present.  
+- Although the **Translation Code** format is **not restricted**, it is recommended to follow this structure:  
+  **`project.feature.subfeature.distinguishing.term`**  
+
+<p align="center">
+	<img width="448" alt="TranslationCreationPopup" src="https://github.com/user-attachments/assets/cd6bd603-158f-48d7-9cbb-7b44c3258740" />
+</p>
+
+# **Technical Documentation**
+
+## Backoffice Starter Annotations
+
+The backoffice starter includes a set of annotations designed to control the behavior, visibility, and properties of entities and their fields within the backoffice interface. These annotations are located in the package `com.memento.tech.backoffice.annotations`.
+
+## **Annotations Overview**
+
+### 1. `@BackofficeTitle` Annotation
+
+**Target:** `TYPE`, `FIELD`  
+**Retention Policy:** `RUNTIME`
+
+The `@BackofficeTitle` annotation defines titles for entities and their fields in the backoffice UI.
+
+- **Type Level:** When applied to a class, it sets the label for the entity in navigation elements (e.g., sidebar buttons, menu items).
+- **Field Level:** When applied to a field, it sets the label for the field in UI elements (e.g., input labels, table headers, data management section).
+
+#### Usage:
+
+```java
+@BackofficeTitle("Username")
+public class User {
+    @BackofficeTitle("Username Field")
+    private String username;
+}
+```
+
+### 2. `@BackofficeOrderPriority` Annotation
+
+**Target:** `TYPE`, `FIELD`  
+**Retention Policy:** `RUNTIME`
+
+The `@BackofficeOrderPriority` annotation determines the ordering of entities in navigation and fields in tables and popups. Higher values indicate higher priority.
+
+- **Default Value:** `0`
+
+#### Usage:
+
+```java
+@BackofficeOrderPriority(100)
+public class User {
+    @BackofficeOrderPriority(50)
+    private String username;
+}
+```
+
+### 3. `@BackofficeGroup` Annotation
+
+**Target:** `TYPE`  
+**Retention Policy:** `RUNTIME`
+
+The `@BackofficeGroup` annotation groups related entities in the navigation menu.
+
+- **`title` (Required):** The title of the group.
+- **`order` (Optional, Default: `0`):** Defines the order of the group within the navigation.
+
+#### Usage:
+
+```java
+@BackofficeGroup(title = "ExampleGroup", order = 100)
+public class ExampleEntity {
+    // Entity fields here
+}
+```
+
+### 4. `@BackofficePasswordFlag` Annotation
+
+**Target:** `FIELD`  
+**Retention Policy:** `RUNTIME`
+
+The `@BackofficePasswordFlag` annotation is a marker used to designate password fields in entities. This ensures they are rendered as password input fields (hidden characters) on the frontend.
+
+#### Usage:
+
+```java
+@BackofficePasswordFlag
+private String password;
+```
+
+### 5. `@BackofficeFieldForShowInList` Annotation
+
+**Target:** `TYPE`  
+**Retention Policy:** `RUNTIME`
+
+The `@BackofficeFieldForShowInList` annotation defines which field should be displayed when showing a list of related entities.
+
+- **`value` (Required):** The field to be displayed in the list (e.g., `title` for a song title).
+
+#### Usage:
+
+```java
+@BackofficeFieldForShowInList("title")
+public class Artist {
+    private List<Song> songs;
+}
+```
+
+### 6. `@BackofficeDisableCreation` Annotation
+
+**Target:** `TYPE`  
+**Retention Policy:** `RUNTIME`
+
+The `@BackofficeDisableCreation` annotation is a marker annotation that prevents the creation of an entity in the backoffice. When this annotation is applied to a class, the "Create" button will not appear in the toolbar.
+
+#### Usage:
+
+```java
+@BackofficeDisableCreation
+public class Artist {
+    // Entity fields here
+}
+```
+
+### 7. `@BackofficeExclude` Annotation
+
+**Target:** `TYPE`, `FIELD`  
+**Retention Policy:** `RUNTIME`
+
+The `@BackofficeExclude` annotation is a marker annotation used to exclude entities or fields from the backoffice UI. It can be applied at the class level (to hide the entire entity) or field level (to hide individual fields in tables or popups).
+
+#### Usage:
+
+```java
+@BackofficeExclude
+private String username;
+
+@BackofficeExclude
+public class Artist {
+    // Entity fields here
+}
+```
+
+### 8. `@BackofficeCreationFieldExclude` Annotation
+
+**Target:** `FIELD`  
+**Retention Policy:** `RUNTIME`
+
+The `@BackofficeCreationFieldExclude` annotation is similar to `@BackofficeExclude`, but it only excludes fields from the entity creation popup.
+
+#### Usage:
+
+```java
+@BackofficeCreationFieldExclude
+private String username;
+```
+
+### 9. `@BackofficeForbidUpdate` Annotation
+
+**Target:** `FIELD`  
+**Retention Policy:** `RUNTIME`
+
+The `@BackofficeForbidUpdate` annotation is a marker annotation that prevents fields from being updated via the backoffice UI. It is useful for fields that can be updated via other parts of the system but should be protected in the backoffice.
+
+#### Usage:
+
+```java
+@BackofficeForbidUpdate
+private String username;
+```
+
+---
+
+## Summary of Annotations
+
+| Annotation                         | Target(s)        | Purpose                                                    |
+|-------------------------------------|------------------|------------------------------------------------------------|
+| `@BackofficeTitle`                  | `TYPE`, `FIELD`  | Sets title for entities (in navigation) and fields (in UI) |
+| `@BackofficeOrderPriority`          | `TYPE`, `FIELD`  | Defines the order/priority of entities and fields          |
+| `@BackofficeGroup`                  | `TYPE`           | Groups entities together in navigation                     |
+| `@BackofficePasswordFlag`           | `FIELD`          | Marks password fields for password input behavior          |
+| `@BackofficeFieldForShowInList`     | `TYPE`           | Defines field to show in list for related entities         |
+| `@BackofficeDisableCreation`        | `TYPE`           | Disables creation of the entity in the backoffice UI       |
+| `@BackofficeExclude`                | `TYPE`, `FIELD`  | Excludes entities or fields from the backoffice interface  |
+| `@BackofficeCreationFieldExclude`   | `FIELD`          | Excludes fields from the entity creation popup             |
+| `@BackofficeForbidUpdate`           | `FIELD`          | Prevents field from being updated in the backoffice UI     |
+
+This annotation documentation should help developers implement their own entities and control the behavior of those entities within the backoffice system effectively.
+
+## **Authentication**
+
+### **Overview**
+
+The authentication system is based on HTTP-only cookies. A JWT token is placed inside an HTTP-only cookie and sent as a response. Each request to the backend is validated against the JWT token, and the system checks for an `ADMIN` role.
+
+### **Configuration Properties**
+
+| Property                                     | Default Value      | Description                                        |
+| -------------------------------------------- | ------------------ | -------------------------------------------------- |
+| `memento.tech.backoffice.auth.token.secret`  | *Predefined*       | Configurable JWT token secret.                     |
+| `memento.tech.backoffice.auth.cookie.expiry` | `0` (milliseconds) | Configurable cookie expiry time.                   |
+| `memento.tech.backoffice.auth.cookie.name`   | *Predefined*       | Configurable cookie name.                          |
+| `memento.tech.backoffice.development.mode`   | `true`             | Enables test user credentials in development mode. |
+
+### **Security Measures**
+
+- **BCryptPasswordEncoder** is used for password encryption.
+- The session creation policy is **STATELESS**.
+- Unauthorized users attempting to access the back office are redirected to `/backoffice/login`.
+- When `memento.tech.backoffice.development.mode` is `true`, a test user with `username: test` and `password: password` is created. This should be disabled in production.
+
+## **Translations Management Tool**
+
+### **Overview**
+
+The Translation Management Tool provides a mechanism for handling multi-language support. If a translation is unavailable for a given translation code, the system returns the translation code itself, helping developers identify missing translations.
+
+### **Configuration Properties**
+
+| Property                                     | Default Value      | Description                                        |
+| -------------------------------------------- | ------------------ | -------------------------------------------------- |
+| `memento.tech.backoffice.translation.defaultLocale`  | `en`       | Default locale for translations.                     |
+| `memento.tech.backoffice.translation.supportedLocales` | `en,fr,de` | List of supported locales.                   |
+
+### **Usage**
+
+Developers should use the `Translation` class inside entity definitions like this:
+
+```java
+private Translation description;
+```
+
+It is recommended to add `cascade = CascadeType.ALL, orphanRemoval = true` to entity associations for proper translation management.
+
+### **Behavior**
+
+- Developers query a translation using a translation code.
+- The tool returns a **pure string** for display on the frontend.
+- If no translation is found, the **translation code is returned**, allowing developers to track missing translations.
+
+## **Media Management Tool**
+
+### **Overview**
+
+The Media Management Tool provides default media storage functionality, storing media files in a specified directory. Developers can implement custom storage solutions by implementing the `FileStorageService` interface.
+
+### **Configuration Properties**
+
+| Property                                     | Default Value      | Description                                        |
+| -------------------------------------------- | ------------------ | -------------------------------------------------- |
+| `memento.tech.backoffice.media.storagePath`  | `/uploads/`        | Directory where media files are stored.           |
+| `memento.tech.backoffice.media.maxSize`     | `10MB`             | Maximum allowed file size for uploads.            |
+
+### **Custom Implementation**
+
+Developers can override the default storage by implementing the following interface:
+
+```java
+package com.memento.tech.backoffice.service;
+
+import org.springframework.web.multipart.MultipartFile;
+import java.io.IOException;
+
+public interface FileStorageService {
+    byte[] getFile(final String fileName) throws IOException;
+    String saveFile(final MultipartFile multipartFile) throws IOException;
+    void removeFile(final String fileName) throws IOException;
+}
+```
+
+Once implemented, the media management system will function seamlessly with the custom storage mechanism.
+
+## **Functional Widgets**
+
+### **Overview**
+
+Functional Widgets provide interactive buttons in the UI to perform specific functions. They can be configured at:
+
+- **Entity Level:** Button appears in the toolbar and applies to all records of an entity.
+- **Record Level:** Button appears inside the entity popup and applies to a single record.
+
+### **Usage**
+
+To use a widget, developers should annotate methods with:
+
+```java
+@RecordFunctionButton(widgetId = "companyApproveWidget", buttonLabel = "Approve", functionBeanClass = PartnerApproveFunctionButtonHandler.class)
+```
+
+Additionally, a record should be added to the database, for example through an `import.sql` file.
+
+### **Implementation**
+
+Developers need to implement the `RecordFunctionButtonHandler` interface:
+
+```java
+package com.memento.tech.backoffice.widget;
+
+public interface RecordFunctionButtonHandler<T> extends WidgetHandler<T> {
+    void handle(T entity);
+}
+```
+
+Additionally, the `WidgetHandler` interface determines whether the widget should be displayed:
+
+```java
+package com.memento.tech.backoffice.widget;
+
+public interface WidgetHandler<T> {
+    boolean show(T entity);
+}
+```
+
+### **Widget Database Structure**
+
+Widgets are stored in the database with the following structure:
+
+```java
+@Entity
+@Table(indexes = {@Index(columnList = "id", unique = true)})
+public class Widget extends BaseEntity implements BackofficeConfigurationMarker {
+    @Column(nullable = false, unique = true)
+    private String widgetId;
+
+    private boolean entityLevel;
+    private boolean recordLevel;
+    private String label;
+
+    @Column(nullable = false, unique = true)
+    private Class<? extends WidgetHandler> widgetHandlerClass;
+
+    @Column(nullable = false, unique = true)
+    private String handlerMapping;
+}
+```
+
+### **Handler Mapping**
+
+A static handler mapping is used to trigger widget actions:
+
+```java
+String WIDGET_API_PREFIX = "/api/backoffice/widget";
+String RECORD_FUNCTION_API_SUFFIX = "/function/record";
+String ENTITY_FUNCTION_API_SUFFIX = "/function/entity";
+```
+
+*Note: Entity-Level Widgets are planned but not yet implemented. They will allow actions to be performed on multiple records at once.*
+
+## **UI Widgets**
+
+UI Widgets are not yet implemented.
+
+## **Cron Job Management Tool**
+
+Cron Job Management is not yet implemented.
+
+## **Live Console**
+
+Live Console is not yet implemented.
+
+## **Conclusion**
+
+This documentation provides an overview of authentication, translation management, media management, functional widgets, and entity-level widgets. Further enhancements will be added as new features are implemented.
 
 ## **Contribution Guide**
 
