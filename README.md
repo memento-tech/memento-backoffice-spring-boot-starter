@@ -294,7 +294,7 @@ The backoffice starter includes a set of annotations designed to control the beh
 
 ## **Annotations Overview**
 
-### 1. `@BackofficeTitle` Annotation
+#### 1. `@BackofficeTitle` Annotation
 
 **Target:** `TYPE`, `FIELD`  
 **Retention Policy:** `RUNTIME`
@@ -314,7 +314,7 @@ public class User {
 }
 ```
 
-### 2. `@BackofficeOrderPriority` Annotation
+#### 2. `@BackofficeOrderPriority` Annotation
 
 **Target:** `TYPE`, `FIELD`  
 **Retention Policy:** `RUNTIME`
@@ -333,7 +333,7 @@ public class User {
 }
 ```
 
-### 3. `@BackofficeGroup` Annotation
+#### 3. `@BackofficeGroup` Annotation
 
 **Target:** `TYPE`  
 **Retention Policy:** `RUNTIME`
@@ -352,7 +352,7 @@ public class ExampleEntity {
 }
 ```
 
-### 4. `@BackofficePasswordFlag` Annotation
+#### 4. `@BackofficePasswordFlag` Annotation
 
 **Target:** `FIELD`  
 **Retention Policy:** `RUNTIME`
@@ -366,7 +366,7 @@ The `@BackofficePasswordFlag` annotation is a marker used to designate password 
 private String password;
 ```
 
-### 5. `@BackofficeFieldForShowInList` Annotation
+#### 5. `@BackofficeFieldForShowInList` Annotation
 
 **Target:** `TYPE`  
 **Retention Policy:** `RUNTIME`
@@ -384,7 +384,7 @@ public class Artist {
 }
 ```
 
-### 6. `@BackofficeDisableCreation` Annotation
+#### 6. `@BackofficeDisableCreation` Annotation
 
 **Target:** `TYPE`  
 **Retention Policy:** `RUNTIME`
@@ -400,7 +400,7 @@ public class Artist {
 }
 ```
 
-### 7. `@BackofficeExclude` Annotation
+#### 7. `@BackofficeExclude` Annotation
 
 **Target:** `TYPE`, `FIELD`  
 **Retention Policy:** `RUNTIME`
@@ -419,7 +419,7 @@ public class Artist {
 }
 ```
 
-### 8. `@BackofficeCreationFieldExclude` Annotation
+#### 8. `@BackofficeCreationFieldExclude` Annotation
 
 **Target:** `FIELD`  
 **Retention Policy:** `RUNTIME`
@@ -433,7 +433,7 @@ The `@BackofficeCreationFieldExclude` annotation is similar to `@BackofficeExclu
 private String username;
 ```
 
-### 9. `@BackofficeForbidUpdate` Annotation
+#### 9. `@BackofficeForbidUpdate` Annotation
 
 **Target:** `FIELD`  
 **Retention Policy:** `RUNTIME`
