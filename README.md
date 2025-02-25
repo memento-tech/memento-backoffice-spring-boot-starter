@@ -89,7 +89,7 @@ The Backoffice Spring Boot Starter is designed for easy installation and setup i
 
 Add the following dependency to your project based on your build system:  
 
-```
+```xml
 pom.xml
 
 <dependency>  
@@ -98,7 +98,7 @@ pom.xml
  <version>${project.version}</version>  
 </dependency>
 ```
-```
+```gradle
 build.gradle
 
 dependencies { implementation "com.memento.tech:memento-backoffice-spring-boot-starter:${project.version}" }
