@@ -286,7 +286,7 @@ The **Entity Creation Popup** is used for adding new entities.
 	<img width="448" alt="TranslationCreationPopup" src="https://github.com/user-attachments/assets/cd6bd603-158f-48d7-9cbb-7b44c3258740" />
 </p>
 
-# **Technical Documentation**
+## **Technical Documentation**
 
 ## Backoffice Starter Annotations
 
