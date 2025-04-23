@@ -1,5 +1,6 @@
 package com.memento.tech.backoffice.populator;
 
+import com.memento.tech.backoffice.dto.EntityCreationSettingsMetadata;
 import com.memento.tech.backoffice.dto.EntityMetadata;
 import com.memento.tech.backoffice.entity.EntitySettings;
 import com.memento.tech.backoffice.exception.BackofficeException;
@@ -30,6 +31,18 @@ public class EntityMetadataPopuplator {
                 .map(entityFieldMetadataPopulator::populateFieldMetadata)
                 .toList();
 
+        var creationFieldsMetadata = entitySettings.getCreationSettings()
+                .getCreationFields()
+                .stream()
+                .filter(fieldSettings -> !fieldSettings.isExcludeField())
+                .map(entityFieldMetadataPopulator::populateFieldMetadata)
+                .toList();
+
+        var creationSettingsMetadata = EntityCreationSettingsMetadata.builder()
+                .allowCreation(!entitySettings.isDisableCreation())
+                .creationFields(creationFieldsMetadata)
+                .build();
+
         var widgetsMetadata = emptyIfNull(entitySettings.getEntityWidgets())
                 .stream()
                 .map(widgetMetadataPopulator::populateWidgetMetadata)
@@ -41,7 +54,7 @@ public class EntityMetadataPopuplator {
                 .entityTitle(entitySettings.getTitle())
                 .fieldForShowInList(entitySettings.getFieldForShowInList())
                 .entityFields(fieldsMetadata)
-                .creationSettings(entitySettings.getCreationSettings())
+                .creationSettingsMetadata(creationSettingsMetadata)
                 .widgets(widgetsMetadata)
                 .numOfRecords(numberOfRecords)
                 .exclude(entitySettings.isExcludeEntity())

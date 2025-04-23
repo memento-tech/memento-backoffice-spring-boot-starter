@@ -1,6 +1,7 @@
 package com.memento.tech.backoffice.mapper;
 
 import com.memento.tech.backoffice.entity.BaseEntity;
+import com.memento.tech.backoffice.entity.EntitySettings;
 import com.memento.tech.backoffice.exception.BackofficeException;
 import com.memento.tech.backoffice.service.EntitySettingsService;
 import lombok.RequiredArgsConstructor;
@@ -20,9 +21,10 @@ public class ExistingEntityMapper {
     private final EntitySettingsService entitySettingsService;
 
     @SuppressWarnings("unchecked")
-    public BaseEntity map(BaseEntity source, BaseEntity destination) {
+    public BaseEntity map(BaseEntity source, BaseEntity destination, EntitySettings entitySettings) {
         Objects.requireNonNull(source);
         Objects.requireNonNull(destination);
+        Objects.requireNonNull(entitySettings);
 
         if (!source.getId().equals(destination.getId())) {
             throw new BackofficeException("", "");
@@ -31,9 +33,6 @@ public class ExistingEntityMapper {
         if (!source.getClass().equals(destination.getClass())) {
             throw new BackofficeException("", "");
         }
-
-        var entitySettings = entitySettingsService.getEntitySettingsForEntity(source)
-                .orElseThrow();
 
         entitySettings.getFieldSettings()
                 .forEach(fieldSettings -> {

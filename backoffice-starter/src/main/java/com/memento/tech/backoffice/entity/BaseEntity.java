@@ -1,5 +1,6 @@
 package com.memento.tech.backoffice.entity;
 
+import com.memento.tech.backoffice.annotations.BackofficeCreationFieldExclude;
 import com.memento.tech.backoffice.annotations.BackofficeForbidUpdate;
 import com.memento.tech.backoffice.annotations.BackofficeOrderPriority;
 import com.memento.tech.backoffice.annotations.BackofficeTitle;
@@ -27,6 +28,7 @@ public class BaseEntity {
     @BackofficeTitle("ID")
     @OrderBy
     @BackofficeForbidUpdate
+    @BackofficeCreationFieldExclude
     private String id;
 
     @Column(updatable = false)
@@ -34,11 +36,13 @@ public class BaseEntity {
     @BackofficeOrderPriority(-1000)
     @BackofficeTitle("Created at")
     @BackofficeForbidUpdate
+    @BackofficeCreationFieldExclude
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
     @BackofficeOrderPriority(-1000)
     @BackofficeTitle("Updated at")
     @BackofficeForbidUpdate
+    @BackofficeCreationFieldExclude
     private LocalDateTime updatedAt;
 }

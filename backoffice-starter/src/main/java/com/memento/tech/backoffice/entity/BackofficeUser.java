@@ -3,6 +3,7 @@ package com.memento.tech.backoffice.entity;
 import com.memento.tech.backoffice.annotations.BackofficeExclude;
 import com.memento.tech.backoffice.annotations.BackofficeGroup;
 import com.memento.tech.backoffice.annotations.BackofficeOrderPriority;
+import com.memento.tech.backoffice.annotations.BackofficePasswordFlag;
 import com.memento.tech.backoffice.annotations.BackofficeTitle;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -46,6 +47,7 @@ public class BackofficeUser extends BaseEntity implements UserDetails, Backoffic
 
     @Column(unique = true, nullable = false)
     @BackofficeTitle("Password")
+    @BackofficePasswordFlag
     @BackofficeOrderPriority(99)
     private String password;
 

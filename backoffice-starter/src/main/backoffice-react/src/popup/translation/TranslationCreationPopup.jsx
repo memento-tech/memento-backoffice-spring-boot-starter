@@ -56,7 +56,7 @@ const TranslationCreationPopup = ({ zIndex, onClose, onSaveSuccess }) => {
     if (existingTranslation) {
       existingTranslation.translation = translationValue;
     } else {
-      var newTranslations = translations;
+      newTranslations = translations;
 
       newTranslations.push({
         langIsoCode: langIsoCode,

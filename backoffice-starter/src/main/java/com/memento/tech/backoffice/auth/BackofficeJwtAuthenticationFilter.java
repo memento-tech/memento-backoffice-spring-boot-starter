@@ -1,7 +1,5 @@
 package com.memento.tech.backoffice.auth;
 
-import com.memento.tech.backoffice.auth.AccessTokenCookieService;
-import com.memento.tech.backoffice.auth.JWTTokenService;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -28,7 +26,7 @@ public class BackofficeJwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JWTTokenService jwtTokenService;
 
-    private final AccessTokenCookieService accessTokenCookieService;
+    private final BackofficeAccessTokenCookieService backofficeAccessTokenCookieService;
 
     private final UserDetailsService backofficeUserDetailsService;
 
@@ -43,10 +41,10 @@ public class BackofficeJwtAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
 
-        accessTokenCookieService.getBackofficeAccessTokenCookie(request)
+        backofficeAccessTokenCookieService.getBackofficeAccessTokenCookie(request)
                 .map(Cookie::getValue)
                 .filter(StringUtils::isNotBlank)
-                .ifPresentOrElse(cookieValue -> {
+                .ifPresent(cookieValue -> {
                     var username = "";
 
                     try {
@@ -72,13 +70,13 @@ public class BackofficeJwtAuthenticationFilter extends OncePerRequestFilter {
                                     deleteCookieAndClearSecurityContext(response);
                                 });
                     }
-                }, SecurityContextHolder::clearContext);
+                });
 
         filterChain.doFilter(request, response);
     }
 
     private void deleteCookieAndClearSecurityContext(HttpServletResponse response) {
-        var blankoBackofficeUserCookie = accessTokenCookieService.createBlankoHttpOnlyCookie();
+        var blankoBackofficeUserCookie = backofficeAccessTokenCookieService.createBlankoHttpOnlyCookie();
         response.addCookie(blankoBackofficeUserCookie);
 
         SecurityContextHolder.clearContext();

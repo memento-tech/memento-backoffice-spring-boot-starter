@@ -22,7 +22,6 @@ memento:
         token:
           secret: 357638792F423F4428472B4B6250655368566D597133743677397A2443424567
         cookie:
-          name: backofficeTokenCookie
           expiry: 31536000
 
 debug: true

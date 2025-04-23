@@ -18,7 +18,7 @@ public class EntityMetadata implements MetadataWrapper {
 
     List<EntityFieldMetadata> entityFields;
 
-    EntityCreationSettings creationSettings;
+    EntityCreationSettingsMetadata creationSettingsMetadata;
 
     List<WidgetMetadata> widgets;
 

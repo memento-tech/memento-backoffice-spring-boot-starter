@@ -1,5 +1,6 @@
 package com.memento.tech.backoffice.populator;
 
+import com.memento.tech.backoffice.entity.EntityCreationSettings;
 import com.memento.tech.backoffice.entity.EntitySettings;
 import com.memento.tech.backoffice.exception.BackofficeException;
 import org.junit.jupiter.api.Test;
@@ -32,6 +33,11 @@ class EntityMetadataPopuplatorTest {
 
     @Test
     void testPopulateEntityMetadata_validEntity() {
+        var creationSettings = EntityCreationSettings.builder()
+                .allowCreation(true)
+                .creationFields(Set.of())
+                .build();
+
         var testEntitySettings = EntitySettings.builder()
                 .fieldSettings(Set.of())
                 .entityWidgets(List.of())
@@ -39,7 +45,7 @@ class EntityMetadataPopuplatorTest {
                 .title("testTitle")
                 .entityGroup("testGroup")
                 .fieldForShowInList("testFieldForShow")
-                .creationSettings(null)
+                .creationSettings(creationSettings)
                 .excludeEntity(true)
                 .translation(true)
                 .media(true)
@@ -56,7 +62,7 @@ class EntityMetadataPopuplatorTest {
         assertTrue(result.isTranslation());
         assertTrue(result.isMedia());
         assertNotNull(result.getEntityFields());
-        assertNull(result.getCreationSettings());
+        assertNotNull(result.getCreationSettingsMetadata());
         assertNotNull(result.getWidgets());
     }
 

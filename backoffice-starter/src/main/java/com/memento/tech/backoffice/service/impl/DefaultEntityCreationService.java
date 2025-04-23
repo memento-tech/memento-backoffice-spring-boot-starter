@@ -24,7 +24,7 @@ public class DefaultEntityCreationService implements EntityCreationService {
 
         var creationFields = entitySettings.getFieldSettings()
                 .stream()
-                .filter(EntityFieldSettings::isCreationExcludeField)
+                .filter(fieldSettings -> !fieldSettings.isCreationExcludeField())
                 .collect(Collectors.toSet());
 
         var creationSettings = EntityCreationSettings.builder()

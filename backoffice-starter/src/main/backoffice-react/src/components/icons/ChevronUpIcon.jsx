@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-
 const ChevronUpIcon = ({
   height = 20,
   color = "black",

@@ -29,7 +29,7 @@ const DataNav = () => {
   return (
     <Container>
       {entityMetadatasState.selectedEntityMetadata &&
-        entityMetadatasState.selectedEntityMetadata.creationSettings
+        entityMetadatasState.selectedEntityMetadata.creationSettingsMetadata
           .allowCreation && (
           <AddNewContainer>
             <AddButton

@@ -8,6 +8,7 @@ import com.memento.tech.backoffice.exception.BackofficeException;
 import com.memento.tech.backoffice.mapper.ExistingEntityMapper;
 import com.memento.tech.backoffice.service.EntityService;
 import com.memento.tech.backoffice.validator.impl.BasicEntityValidator;
+import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -47,7 +48,6 @@ public class DefaultEntityService implements EntityService {
     public void saveRecord(BaseEntity entityData, EntitySettings entitySettings, boolean isNew) {
         var entityToSave = entityData;
 
-
         if (isNew) {
             basicEntityValidator.validateEntity(entityData, entitySettings);
         } else {
@@ -56,8 +56,7 @@ public class DefaultEntityService implements EntityService {
 
             basicEntityValidator.validateWithExistingEntity(entityData, (BaseEntity) persistedEntity, entitySettings);
 
-
-            existingEntityMapper.map(entityData, (BaseEntity) persistedEntity);
+            existingEntityMapper.map(entityData, (BaseEntity) persistedEntity, entitySettings);
 
             //map new fields to existing entity
             entityToSave = (BaseEntity) persistedEntity;

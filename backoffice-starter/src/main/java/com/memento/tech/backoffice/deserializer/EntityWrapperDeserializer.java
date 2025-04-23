@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.BooleanNode;
 import com.fasterxml.jackson.databind.node.NullNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
@@ -29,6 +30,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -57,6 +59,13 @@ public final class EntityWrapperDeserializer extends JsonDeserializer<EntityWrap
 
         TreeNode entityNameNode = node.get("entityName");
         TreeNode entityDataNode = node.get("entityData");
+        TreeNode isCreationNode = node.get("isCreation");
+
+        var isCreation = Optional.ofNullable(isCreationNode)
+                .filter(BooleanNode.class::isInstance)
+                .map(BooleanNode.class::cast)
+                .map(BooleanNode::booleanValue)
+                .orElse(false);
 
         if (entityNameNode instanceof NullNode || entityDataNode instanceof NullNode) {
             throw new BackofficeException("EntityWrapperDeserializer::deserialize : Entity name and/or entity data can not be null!", UN_SUFFICIENT_DATA_ERROR);
@@ -69,12 +78,14 @@ public final class EntityWrapperDeserializer extends JsonDeserializer<EntityWrap
 
         var entity = getEntityInstance(entitySettings.getEntityClass());
 
-        var fieldsSettings = entitySettings.getFieldSettings();
+        var fields = isCreation
+                ? entitySettings.getCreationSettings().getCreationFields()
+                : entitySettings.getFieldSettings();
 
         entityDataJson.fields().forEachRemaining(entry -> {
             var propertyName = entry.getKey();
 
-            var fieldSettings = fieldsSettings
+            var fieldSettings = fields
                     .stream()
                     .filter(settings -> settings.getField().equals(propertyName))
                     .findFirst()

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import BackofficeNavButton from "./BackofficeNavButton";
 import styled from "styled-components";
 import ChevronUpIcon from "./icons/ChevronUpIcon";

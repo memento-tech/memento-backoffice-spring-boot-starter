@@ -49,12 +49,12 @@ public class Widget extends BaseEntity implements BackofficeConfigurationMarker 
     @BackofficeOrderPriority(99)
     private String label;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     @SuppressWarnings("rawtypes")
     @BackofficeForbidUpdate
     private Class<? extends WidgetHandler> widgetHandlerClass;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     @BackofficeTitle("Handler Mapping")
     @BackofficeOrderPriority(98)
     private String handlerMapping;

@@ -1,5 +1,3 @@
-import styled from "styled-components";
-
 const ChevronDownIcon = ({
   height = 20,
   color = "black",

@@ -11,7 +11,7 @@ import java.util.Optional;
 import static java.util.Objects.requireNonNull;
 
 @Service
-public final class AccessTokenCookieService {
+public final class BackofficeAccessTokenCookieService {
 
     @Value("${memento.tech.backoffice.auth.cookie.name:backofficeAccessCookie}")
     private String backofficeUserAccessTokenCookieName;

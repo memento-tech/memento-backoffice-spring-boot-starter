@@ -11,8 +11,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-
 @Service
 @RequiredArgsConstructor
 public class BackofficeAuthenticationService {
@@ -21,7 +19,7 @@ public class BackofficeAuthenticationService {
 
     private final JWTTokenService jwtTokenService;
 
-    private final AccessTokenCookieService accessTokenCookieService;
+    private final BackofficeAccessTokenCookieService backofficeAccessTokenCookieService;
 
     public ResponseEntity<?> authenticate(HttpServletResponse response, LoginRequest loginRequest) {
         if (StringUtils.isBlank(loginRequest.getUsername())) {
@@ -40,13 +38,13 @@ public class BackofficeAuthenticationService {
     }
 
     public void logout(HttpServletResponse response) {
-        var blankoBackofficeUserCookie = accessTokenCookieService.createBlankoHttpOnlyCookie();
+        var blankoBackofficeUserCookie = backofficeAccessTokenCookieService.createBlankoHttpOnlyCookie();
         response.addCookie(blankoBackofficeUserCookie);
     }
 
     protected ResponseEntity<?> setupCookieTokenAuthentication(HttpServletResponse response, String username) {
         String accessToken = jwtTokenService.generateToken(username);
-        var cookie = accessTokenCookieService.createHttpOnlyCookie(accessToken);
+        var cookie = backofficeAccessTokenCookieService.createHttpOnlyCookie(accessToken);
 
         response.addCookie(cookie);
 
